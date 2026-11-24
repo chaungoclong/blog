@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="meadow">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ghi Chép Bên Hiên — Blog Phong Cách Studio Ghibli</title>
+  <!-- Áp dụng chế độ thời gian đồng bộ TRƯỚC khi trình duyệt vẽ giao diện để chống nhấp nháy (FOUC) -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ghibli-blog-theme');
+        if (saved === 'meadow' || saved === 'sunset' || saved === 'starlight') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (e) {}
+      document.documentElement.classList.add('no-theme-transition');
+    })();
+  </script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Newsreader & Lora (Serif văn chương), Quicksand (UI tròn mềm Ghibli), JetBrains Mono (Code & EXIF) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Tắt transition trong frame đầu tiên khi load trang để không bị chớp màu */
+    .no-theme-transition,
+    .no-theme-transition *,
+    .no-theme-transition *::before,
+    .no-theme-transition *::after {
+      transition: none !important;
+    }
+
+    /* =========================================================================
+       1. BẢNG MÀU 3 CHẾ ĐỘ THỜI GIAN STUDIO GHIBLI
+       ========================================================================= */
+    :root,
+    [data-theme="meadow"] {
+      --sky-top: #9ED5F0;
+      --sky-mid: #CBE8F4;
+      --sky-bottom: #F5F1DC;
+      --card-bg: rgba(254, 250, 240, 0.92);
+      --card-solid: #FEFAF0;
+      --badge-bg: rgba(254, 250, 240, 0.92);
+      --bg-subtle: #F3ECDD;
+      --text-primary: #2F362C;
+      --text-secondary: #5E6859;
+      --border-soft: #DFD5BF;
+      --accent-green: #4C7C59;
+      --accent-warm: #C46849;
+      --pill-active-bg: #E1EFE2;
+      --pill-active-text: #2F5D3D;
+      --code-bg: #F4EFE2;
+      --code-header-bg: #EAE1CE;
+      --img-filter: saturate(1.04) contrast(0.98) sepia(0.06);
+      --hill-far: #9FC49A;
+      --hill-mid: #78A878;
+      --hill-near: #55855B;
+      --cloud-fill: #FFFDF7;
+      --cloud-opacity: 0.88;
+      --window-glow: #F4E4B6;
+      --syn-keyword: #B8523A;
+      --syn-string: #3A6B4C;
+      --syn-func: #5C4D3C;
+      --syn-comment: #858071;
+      --syn-type: #7A5C32;
+      --syn-number: #C06438;
+    }
+
+    [data-theme="sunset"] {
+      --sky-top: #E69A7B;
+      --sky-mid: #F5C396;
+      --sky-bottom: #FCE4B8;
+      --card-bg: rgba(255, 248, 238, 0.92);
+      --card-solid: #FFF8EE;
+      --badge-bg: rgba(255, 248, 238, 0.92);
+      --bg-subtle: #F6E9D7;
+      --text-primary: #3A2A22;
+      --text-secondary: #745B4D;
+      --border-soft: #E5CFB8;
+      --accent-green: #5B7A58;
+      --accent-warm: #C2593F;
+      --pill-active-bg: #F7DFCE;
+      --pill-active-text: #8F3E28;
+      --code-bg: #F6ECDE;
+      --code-header-bg: #EEDEC9;
+      --img-filter: saturate(1.08) sepia(0.14) contrast(0.98);
+      --hill-far: #C4937A;
+      --hill-mid: #9C7A62;
+      --hill-near: #6D634E;
+      --cloud-fill: #FFEBD6;
+      --cloud-opacity: 0.82;
+      --window-glow: #FFD57A;
+      --syn-keyword: #B64932;
+      --syn-string: #4A7049;
+      --syn-func: #684534;
+      --syn-comment: #8E7565;
+      --syn-type: #8A5B2F;
+      --syn-number: #C76130;
+    }
+
+    [data-theme="starlight"] {
+      --sky-top: #141E36;
+      --sky-mid: #233457;
+      --sky-bottom: #334A6B;
+      --card-bg: rgba(28, 36, 54, 0.9);
+      --card-solid: #1E273B;
+      --badge-bg: rgba(24, 32, 50, 0.88);
+      --bg-subtle: #26324B;
+      --text-primary: #EAE5D6;
+      --text-secondary: #A9B5C9;
+      --border-soft: #394866;
+      --accent-green: #88C097;
+      --accent-warm: #E89C7C;
+      --pill-active-bg: #2E4548;
+      --pill-active-text: #A8DFB5;
+      --code-bg: #182032;
+      --code-header-bg: #222D44;
+      --img-filter: brightness(0.92) contrast(1.02);
+      --hill-far: #24384E;
+      --hill-mid: #1C2E3F;
+      --hill-near: #142230;
+      --cloud-fill: #4A6084;
+      --cloud-opacity: 0.32;
+      --window-glow: #FFE285;
+      --syn-keyword: #E6987A;
+      --syn-string: #94CCA2;
+      --syn-func: #E2CFA8;
+      --syn-comment: #7D8DA8;
+      --syn-type: #D4B282;
+      --syn-number: #E8A67D;
+    }
+
+    /* =========================================================================
+       2. NỀN TRỜI MÀU NƯỚC & TYPOGRAPHY
+       ========================================================================= */
+    body {
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 45%, var(--sky-bottom) 100%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: 'Newsreader', 'Lora', Georgia, serif;
+      transition: color 0.4s ease, background 0.6s ease;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Lớp vân giấy màu nước siêu nhẹ */
+    .watercolor-grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .font-serif-book { font-family: 'Newsreader', 'Lora', Georgia, serif; }
+    .font-ui-ghibli { font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace; }
+
+    .text-primary-g { color: var(--text-primary); }
+    .text-secondary-g { color: var(--text-secondary); }
+    .text-accent-green { color: var(--accent-green); }
+    .text-accent-warm { color: var(--accent-warm); }
+    .border-soft-g { border-color: var(--border-soft); }
+    .bg-subtle-g { background-color: var(--bg-subtle); }
+
+    /* Thẻ sổ tay màu nước chính */
+    .ghibli-paper-card {
+      background-color: var(--card-bg);
+      border: 1.5px solid var(--border-soft);
+      box-shadow: 0 20px 50px -18px rgba(42, 54, 42, 0.16), 0 4px 14px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background-color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+    }
+
+    /* Ẩn thanh cuộn ngang nhưng vẫn giữ vuốt cảm ứng mượt mà trên mobile */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* =========================================================================
+       3. KHUNG CẢNH BẦU TRỜI, MÂY TRÔI, SAO & HẠT BAY
+       ========================================================================= */
+    .sky-scene {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .cloud-drift-1 {
+      animation: driftSlow 75s linear infinite;
+    }
+
+    .cloud-drift-2 {
+      animation: driftSlow 105s linear infinite reverse;
+    }
+
+    @keyframes driftSlow {
+      0% { transform: translateX(-8%); }
+      50% { transform: translateX(8%); }
+      100% { transform: translateX(-8%); }
+    }
+
+    .stars-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    [data-theme="starlight"] .stars-layer {
+      opacity: 1;
+    }
+
+    .star-dot {
+      position: absolute;
+      border-radius: 9999px;
+      background: #FFF9D6;
+      animation: twinkle 3.6s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.25; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .particles-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .float-particle {
+      position: absolute;
+      border-radius: 9999px;
+      opacity: 0;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) translateX(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.78; }
+      85% { opacity: 0.72; }
+      100% { transform: translateY(-10vh) translateX(48px) rotate(180deg); opacity: 0; }
+    }
+
+    /* Khói ống khói ngôi nhà gỗ */
+    .chimney-puff {
+      animation: smokeRise 5.5s ease-out infinite;
+      transform-origin: center;
+    }
+
+    .chimney-puff-2 {
+      animation: smokeRise 5.5s ease-out 2.6s infinite;
+      transform-origin: center;
+    }
+
+    @keyframes smokeRise {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+      25% { opacity: 0.55; }
+      100% { opacity: 0; transform: translate(18px, -36px) scale(1.7); }
+    }
+
+    /* Bồ Hóng (Susuwatari) tương tác */
+    .soot-sprite {
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: inline-block;
+    }
+
+    .soot-sprite:hover {
+      transform: translateY(-5px) scale(1.12);
+    }
+
+    .soot-bounce {
+      animation: sootJump 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes sootJump {
+      0% { transform: translateY(0) scale(1); }
+      40% { transform: translateY(-14px) scale(1.18) rotate(-8deg); }
+      75% { transform: translateY(-4px) scale(0.94) rotate(6deg); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    /* =========================================================================
+       4. VĂN BẢN, THẺ BÀI VIẾT, CODE BLOCK & ẢNH BƯU THIẾP
+       ========================================================================= */
+    .post-card {
+      padding: 1rem 1.05rem;
+      border-radius: 18px;
+      border: 1.5px solid transparent;
+      transition: background-color 0.28s ease, border-color 0.28s ease, transform 0.28s ease;
+    }
+
+    @media (min-width: 640px) {
+      .post-card {
+        padding: 1.2rem 1.25rem;
+        border-radius: 20px;
+      }
+    }
+
+    .post-card:hover {
+      background-color: var(--bg-subtle);
+      border-color: var(--border-soft);
+      transform: translateY(-2px);
+    }
+
+    .post-card:hover .post-title {
+      color: var(--accent-green);
+    }
+
+    .drop-cap::first-letter {
+      float: left;
+      font-family: 'Newsreader', 'Lora', Georgia, serif;
+      font-size: 3.3rem;
+      line-height: 0.82;
+      padding-top: 0.18rem;
+      padding-right: 0.6rem;
+      padding-bottom: 0.08rem;
+      font-weight: 600;
+      color: var(--accent-green);
+    }
+
+    @media (min-width: 640px) {
+      .drop-cap::first-letter {
+        font-size: 3.6rem;
+        padding-right: 0.65rem;
+      }
+    }
+
+    .prose-ghibli p {
+      font-size: 1.06rem;
+      line-height: 1.82;
+      margin-bottom: 1.35rem;
+    }
+
+    @media (min-width: 640px) {
+      .prose-ghibli p {
+        font-size: 1.14rem;
+        line-height: 1.84;
+        margin-bottom: 1.45rem;
+      }
+    }
+
+    .prose-ghibli h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-top: 2.15rem;
+      margin-bottom: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    @media (min-width: 640px) {
+      .prose-ghibli h2 {
+        font-size: 1.48rem;
+        margin-top: 2.35rem;
+        margin-bottom: 0.95rem;
+      }
+    }
+
+    .prose-ghibli blockquote {
+      border-left: 3px solid var(--accent-green);
+      background-color: var(--bg-subtle);
+      padding: 1rem 1.2rem;
+      border-radius: 0 16px 16px 0;
+      margin: 1.75rem 0;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 1.06rem;
+      line-height: 1.75;
+    }
+
+    @media (min-width: 640px) {
+      .prose-ghibli blockquote {
+        padding: 1.05rem 1.35rem;
+        font-size: 1.12rem;
+      }
+    }
+
+    .prose-ghibli code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      padding: 0.12rem 0.42rem;
+      border-radius: 6px;
+      background-color: var(--bg-subtle);
+      color: var(--accent-warm);
+    }
+
+    .code-wrapper {
+      background-color: var(--code-bg);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 16px;
+      margin: 1.7rem 0;
+      overflow: hidden;
+    }
+
+    .code-header {
+      background-color: var(--code-header-bg);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 0.5rem 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+    }
+
+    .code-wrapper pre {
+      margin: 0;
+      padding: 1rem 1.15rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.66;
+      overflow-x: auto;
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    @media (min-width: 640px) {
+      .code-wrapper pre {
+        padding: 1.05rem 1.25rem;
+        font-size: 0.83rem;
+        line-height: 1.68;
+      }
+    }
+
+    .code-wrapper pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .tok-kw { color: var(--syn-keyword); font-weight: 500; }
+    .tok-str { color: var(--syn-string); }
+    .tok-fn { color: var(--syn-func); font-weight: 500; }
+    .tok-cm { color: var(--syn-comment); font-style: italic; }
+    .tok-tp { color: var(--syn-type); }
+    .tok-num { color: var(--syn-number); }
+
+    .postcard-figure {
+      margin: 1.9rem 0;
+    }
+
+    .postcard-frame {
+      border: 1.5px solid var(--border-soft);
+      background-color: var(--card-solid);
+      padding: 0.5rem;
+      border-radius: 18px;
+      box-shadow: 0 10px 24px -12px rgba(60, 74, 58, 0.16);
+    }
+
+    .postcard-frame img {
+      width: 100%;
+      height: auto;
+      max-height: 370px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      filter: var(--img-filter);
+    }
+
+    .postcard-caption {
+      margin-top: 0.7rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    .leaf-ornament {
+      text-align: center;
+      color: var(--accent-green);
+      letter-spacing: 0.4em;
+      font-size: 1rem;
+      margin: 2rem 0;
+      user-select: none;
+    }
+
+    .fade-in {
+      animation: fadeInGhibli 0.35s ease-out forwards;
+    }
+
+    @keyframes fadeInGhibli {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================================================================
+       5. GÓC ẢNH (MASONRY ĐA TỈ LỆ CHÂN DUNG / PHONG CẢNH)
+       ========================================================================= */
+    .gallery-masonry {
+      column-count: 1;
+      column-gap: 1.5rem;
+      padding-top: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .gallery-masonry {
+        column-count: 2;
+        column-gap: 1.6rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .gallery-masonry {
+        column-count: 3;
+        column-gap: 1.75rem;
+      }
+    }
+
+    .gallery-card {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      margin-bottom: 1.65rem;
+      background-color: var(--card-solid);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 18px;
+      padding: 0.7rem 0.7rem 1rem 0.7rem;
+      box-shadow: 0 10px 24px -10px rgba(74, 82, 68, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.35s ease,
+                  border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-card:nth-child(odd):hover {
+      transform: translateY(-6px) rotate(-1.1deg);
+      box-shadow: 0 18px 34px -12px rgba(74, 102, 79, 0.24);
+      border-color: var(--accent-green);
+    }
+
+    .gallery-card:nth-child(even):hover {
+      transform: translateY(-6px) rotate(1.1deg);
+      box-shadow: 0 18px 34px -12px rgba(166, 86, 56, 0.22);
+      border-color: var(--accent-warm);
+    }
+
+    /* Miếng băng dính giấy (Washi Tape) nhỏ xinh dán trên góc ảnh */
+    .washi-tape {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      width: 68px;
+      height: 18px;
+      transform: translateX(-50%) rotate(-2.5deg);
+      border-radius: 3px;
+      opacity: 0.78;
+      pointer-events: none;
+      z-index: 10;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .gallery-card:nth-child(even) .washi-tape {
+      transform: translateX(-50%) rotate(2.8deg);
+    }
+
+    .washi-green {
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(130, 179, 142, 0.72),
+        rgba(130, 179, 142, 0.72) 6px,
+        rgba(164, 205, 173, 0.72) 6px,
+        rgba(164, 205, 173, 0.72) 12px
+      );
+    }
+
+    .washi-warm {
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(224, 152, 122, 0.72),
+        rgba(224, 152, 122, 0.72) 6px,
+        rgba(241, 187, 156, 0.72) 6px,
+        rgba(241, 187, 156, 0.72) 12px
+      );
+    }
+
+    .washi-gold {
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(232, 197, 120, 0.75),
+        rgba(232, 197, 120, 0.75) 6px,
+        rgba(244, 219, 158, 0.75) 6px,
+        rgba(244, 219, 158, 0.75) 12px
+      );
+    }
+
+    .gallery-photo-wrap {
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: var(--bg-subtle);
+      position: relative;
+    }
+
+    .gallery-photo-wrap img {
+      width: 100%;
+      height: auto;
+      min-height: 150px;
+      max-height: 440px;
+      object-fit: cover;
+      display: block;
+      filter: var(--img-filter);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+    }
+
+    .gallery-card:hover .gallery-photo-wrap img {
+      transform: scale(1.04);
+    }
+
+    /* Badge chủ đề & nút đóng nền mờ kính tương phản rõ nét trên mọi nền sáng/tối */
+    .photo-badge {
+      background-color: var(--badge-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-soft);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+    }
+
+    .mini-postcard {
+      position: relative;
+      background-color: var(--card-solid);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 16px;
+      padding: 0.45rem 0.45rem 0.7rem 0.45rem;
+      box-shadow: 0 8px 18px -10px rgba(74, 82, 68, 0.16);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .mini-postcard:hover {
+      transform: translateY(-4px) rotate(-1deg);
+      border-color: var(--accent-green);
+    }
+
+    /* =========================================================================
+       6. POPUP & ANIMATION CHUẨN MACOS QUICK LOOK / SEQUOIA SPRING
+       ========================================================================= */
+    .ghibli-modal-shell {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      pointer-events: none;
+      transition: visibility 0s linear 0.24s;
+    }
+
+    .ghibli-modal-shell.is-open {
+      visibility: visible;
+      pointer-events: auto;
+      transition: visibility 0s linear 0s;
+    }
+
+    .ghibli-modal-shell.is-closing {
+      visibility: visible;
+      pointer-events: none;
+      transition: visibility 0s linear 0.24s;
+    }
+
+    /* Lớp nền mờ kính tách riêng để fade mượt không giật khung hình */
+    .ghibli-modal-backdrop-layer {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 20, 26, 0.74);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      opacity: 0;
+      will-change: opacity;
+      transition: opacity 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .ghibli-modal-shell.is-open .ghibli-modal-backdrop-layer {
+      opacity: 1;
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ghibli-modal-shell.is-closing .ghibli-modal-backdrop-layer {
+      opacity: 0;
+      transition: opacity 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    /* Cửa sổ macOS Quick Look phóng mở từ độ lệch tâm (--from-x, --from-y) */
+    .macos-window {
+      position: relative;
+      z-index: 10;
+      opacity: 0;
+      transform: translate3d(var(--from-x, 0px), var(--from-y, 16px), 0) scale(0.92);
+      will-change: transform, opacity;
+      transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1),
+                  opacity 0.18s ease-in;
+    }
+
+    .ghibli-modal-shell.is-open .macos-window {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ghibli-modal-shell.is-closing .macos-window {
+      opacity: 0;
+      transform: translate3d(0, 10px, 0) scale(0.94);
+      transition: transform 0.22s cubic-bezier(0.32, 0.72, 0, 1),
+                  opacity 0.18s ease-in;
+    }
+
+    /* Kích thước chuẩn viewport động (dvh kèm fallback vh) cho Lightbox đa thiết bị */
+    .lightbox-window-sizing {
+      height: 92vh;
+      height: 92dvh;
+      max-height: 92vh;
+      max-height: 92dvh;
+    }
+
+    .lightbox-stage-sizing {
+      height: 38vh;
+      height: 38dvh;
+      min-height: 210px;
+      max-height: 330px;
+    }
+
+    @media (min-width: 640px) {
+      .lightbox-stage-sizing {
+        height: 44vh;
+        height: 44dvh;
+        max-height: 420px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lightbox-window-sizing {
+        height: 84vh;
+        height: 84dvh;
+        max-height: 780px;
+      }
+
+      .lightbox-stage-sizing {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        flex: 1 1 0%;
+      }
+    }
+
+    /* Kích thước chuẩn viewport động cho Modal Đăng ảnh mới */
+    .upload-window-sizing {
+      max-height: 90vh;
+      max-height: 90dvh;
+    }
+
+    /* Hiệu ứng chuyển ảnh trong Lightbox (trượt nhẹ ±16px + fade mượt 240ms) */
+    #lb-img {
+      will-change: transform, opacity;
+      transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Thanh cuộn tinh tế cho panel nội dung bên trong modal */
+    .ghibli-scroll {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .ghibli-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .ghibli-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .ghibli-scroll::-webkit-scrollbar-thumb {
+      background-color: var(--border-soft);
+      border-radius: 9999px;
+    }
+
+    .ghibli-scroll::-webkit-scrollbar-thumb:hover {
+      background-color: var(--text-secondary);
+    }
+
+    /* Sân khấu trưng bày ảnh tối ấm giúp bức ảnh có chiều sâu & khoảng thở đều 4 phía */
+    .lightbox-stage {
+      background: radial-gradient(circle at center, #232830 0%, #13161B 100%);
+      touch-action: pan-y;
+    }
+
+    .lightbox-nav-btn {
+      background: rgba(255, 253, 248, 0.14);
+      border: 1px solid rgba(255, 253, 248, 0.22);
+      color: #F7F4EC;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .lightbox-nav-btn:hover {
+      background: rgba(255, 253, 248, 0.24);
+      border-color: rgba(255, 253, 248, 0.44);
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    .lightbox-nav-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    /* Trạng thái nút thả tim tương phản rõ ràng */
+    .like-btn-active {
+      background-color: rgba(196, 104, 73, 0.14) !important;
+      border-color: rgba(196, 104, 73, 0.45) !important;
+      color: #C45842 !important;
+    }
+
+    .drop-zone-active {
+      border-color: var(--accent-green) !important;
+      background-color: var(--pill-active-bg) !important;
+    }
+
+    /* Tôn trọng cài đặt giảm chuyển động của người dùng */
+    @media (prefers-reduced-motion: reduce) {
+      .cloud-drift-1,
+      .cloud-drift-2,
+      .star-dot,
+      .float-particle,
+      .chimney-puff,
+      .chimney-puff-2,
+      .fade-in {
+        animation: none !important;
+      }
+
+      .macos-window,
+      .ghibli-modal-shell.is-open .macos-window,
+      .ghibli-modal-shell.is-closing .macos-window,
+      .ghibli-modal-backdrop-layer,
+      #lb-img {
+        transition-duration: 0.08s !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-emerald-700/20">
+  <!-- Lớp vân giấy màu nước -->
+  <div class="watercolor-grain" aria-hidden="true"></div>
+
+  <!-- Khung cảnh bầu trời & mây tích Ghibli vẽ bằng SVG -->
+  <div class="sky-scene" aria-hidden="true">
+    <svg class="w-full h-64 sm:h-80" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMin slice">
+      <g class="cloud-drift-1" style="fill: var(--cloud-fill); opacity: var(--cloud-opacity); transition: fill 0.6s ease, opacity 0.6s ease;">
+        <path d="M90 140 C90 105, 130 88, 162 102 C178 72, 226 68, 250 94 C282 88, 314 112, 310 140 Z" />
+        <path d="M980 115 C980 78, 1025 60, 1062 76 C1085 40, 1152 38, 1180 70 C1218 65, 1255 90, 1252 118 Z" />
+      </g>
+      <g class="cloud-drift-2" style="fill: var(--cloud-fill); opacity: calc(var(--cloud-opacity) * 0.75); transition: fill 0.6s ease, opacity 0.6s ease;">
+        <path d="M510 175 C510 145, 545 130, 574 142 C594 112, 646 110, 670 136 C702 132, 728 152, 725 175 Z" />
+        <path d="M1260 205 C1260 180, 1292 168, 1318 178 C1336 154, 1380 152, 1398 174 C1422 172, 1440 188, 1438 205 Z" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Lớp sao lấp lánh (hiện ở chế độ Đêm sao) -->
+  <div id="stars-layer" class="stars-layer" aria-hidden="true"></div>
+
+  <!-- Lớp hạt bay tự nhiên (Bồ công anh / Lá vàng / Đom đóm) -->
+  <div id="particles-layer" class="particles-layer" aria-hidden="true"></div>
+
+  <!-- KHUNG CHỨA CHÍNH (TỐI ƯU LỀ RỘNG RÃI CHO MOBILE 320px–440px VÀ MỞ RỘNG ĐẸP TRÊN DESKTOP) -->
+  <div id="main-container" class="w-full max-w-[760px] mx-auto px-2.5 sm:px-6 pt-4 sm:pt-11 pb-10 sm:pb-12 flex-grow flex flex-col relative z-10 transition-[max-width] duration-500 ease-out">
+
+    <!-- THẺ SỔ TAY MÀU NƯỚC BO GÓC MỀM -->
+    <div class="ghibli-paper-card px-4 sm:px-9 md:px-10 pt-5 sm:pt-8 pb-9 sm:pb-12 rounded-[22px] sm:rounded-[28px] flex-grow flex flex-col">
+
+      <!-- HEADER GHIBLI TỐI ƯU ĐA THIẾT BỊ (320px -> 1440px+) -->
+      <header class="pb-4 sm:pb-6 border-b border-soft-g">
+        <div class="flex flex-col gap-3.5 sm:gap-5">
+          <!-- Hàng 1: Brand & Bộ chuyển 3 chế độ thời gian (iOS Segmented Control trên mobile) -->
+          <div class="flex flex-col gap-3.5 sm:flex-row sm:items-center sm:justify-between">
+            <a
+              href="#home"
+              onclick="navigateTo('home'); return false;"
+              class="group inline-flex items-center gap-2.5 min-w-0 self-start"
+            >
+              <span class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-2xl bg-subtle-g border border-soft-g flex items-center justify-center text-base sm:text-lg shadow-sm group-hover:rotate-6 transition-transform" aria-hidden="true">
+                🌿
+              </span>
+              <span class="font-serif-book text-[21px] sm:text-[26px] font-semibold italic tracking-tight text-primary-g group-hover:text-accent-green transition-colors whitespace-nowrap">
+                Ghi chép bên hiên
+              </span>
+            </a>
+
+            <!-- Bộ chuyển 3 chế độ thời gian kiểu iOS Segmented Control: 3 cột đều 100% trên mobile, gọn trên sm+ -->
+            <div
+              class="grid grid-cols-3 w-full sm:inline-flex sm:w-auto items-center gap-1 p-1 rounded-full border border-soft-g bg-subtle-g font-ui-ghibli font-bold"
+              role="group"
+              aria-label="Chế độ thời gian Ghibli"
+            >
+              <button
+                type="button"
+                onclick="setTheme('meadow')"
+                id="btn-meadow"
+                class="theme-btn whitespace-nowrap justify-center px-1.5 sm:px-2.5 py-1.5 sm:py-1 text-[11px] min-[390px]:text-xs rounded-full transition-all duration-200 flex items-center gap-1"
+                title="Nắng sớm trên đồng cỏ"
+              >
+                <span aria-hidden="true">☀️</span>
+                <span>Nắng sớm</span>
+              </button>
+              <button
+                type="button"
+                onclick="setTheme('sunset')"
+                id="btn-sunset"
+                class="theme-btn whitespace-nowrap justify-center px-1.5 sm:px-2.5 py-1.5 sm:py-1 text-[11px] min-[390px]:text-xs rounded-full transition-all duration-200 flex items-center gap-1"
+                title="Hoàng hôn cam đào"
+              >
+                <span aria-hidden="true">🌇</span>
+                <span>Hoàng hôn</span>
+              </button>
+              <button
+                type="button"
+                onclick="setTheme('starlight')"
+                id="btn-starlight"
+                class="theme-btn whitespace-nowrap justify-center px-1.5 sm:px-2.5 py-1.5 sm:py-1 text-[11px] min-[390px]:text-xs rounded-full transition-all duration-200 flex items-center gap-1"
+                title="Đêm sao & đom đóm"
+              >
+                <span aria-hidden="true">🌙</span>
+                <span>Đêm sao</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Hàng 2: Thanh điều hướng 4 mục luôn nằm gọn 1 hàng, không rớt dòng trên 320px / iPhone SE -->
+          <nav class="font-ui-ghibli flex flex-nowrap items-center justify-between sm:justify-start gap-1 sm:gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 py-0.5 text-secondary-g" aria-label="Điều hướng chính">
+            <a
+              href="#home"
+              id="nav-home"
+              onclick="navigateTo('home'); return false;"
+              class="nav-item whitespace-nowrap shrink-0 text-[13px] sm:text-[14px] px-2.5 min-[400px]:px-3 sm:px-3.5 py-1.5 rounded-full transition-all font-semibold hover:text-primary-g"
+            >
+              Bài viết
+            </a>
+            <a
+              href="#photos"
+              id="nav-photos"
+              onclick="navigateTo('photos'); return false;"
+              class="nav-item whitespace-nowrap shrink-0 text-[13px] sm:text-[14px] px-2.5 min-[400px]:px-3 sm:px-3.5 py-1.5 rounded-full transition-all font-semibold hover:text-primary-g inline-flex items-center gap-1.5"
+            >
+              <svg class="hidden min-[360px]:inline-block w-3.5 h-3.5 shrink-0 opacity-85" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+              <span>Góc ảnh</span>
+            </a>
+            <a
+              href="#archive"
+              id="nav-archive"
+              onclick="navigateTo('archive'); return false;"
+              class="nav-item whitespace-nowrap shrink-0 text-[13px] sm:text-[14px] px-2.5 min-[400px]:px-3 sm:px-3.5 py-1.5 rounded-full transition-all font-semibold hover:text-primary-g"
+            >
+              Lưu trữ
+            </a>
+            <a
+              href="#about"
+              id="nav-about"
+              onclick="navigateTo('about'); return false;"
+              class="nav-item whitespace-nowrap shrink-0 text-[13px] sm:text-[14px] px-2.5 min-[400px]:px-3 sm:px-3.5 py-1.5 rounded-full transition-all font-semibold hover:text-primary-g"
+            >
+              Giới thiệu
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- KHU VỰC NỘI DUNG CHÍNH -->
+      <main id="app-content" class="flex-grow pt-6 sm:pt-9"></main>
+
+      <!-- FOOTER KÈM 3 CHÚ BỒ HÓNG TƯƠNG TÁC -->
+      <footer class="mt-12 sm:mt-14 pt-6 sm:pt-7 border-t border-soft-g font-ui-ghibli text-xs text-secondary-g flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <p class="font-semibold text-primary-g">© 2026 Ghi chép bên hiên · Vẽ bằng màu nước & nắng gió.</p>
+          <p class="mt-1 text-[11px] opacity-80">Mẹo nhỏ: thử chạm vào các chú Bồ Hóng bên cạnh nhé!</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <!-- 3 chú Bồ Hóng (Susuwatari) lấp ló -->
+          <div class="flex items-center gap-1.5" aria-label="Các chú Bồ Hóng Ghibli">
+            <button
+              type="button"
+              onclick="pokeSootSprite(this, 0)"
+              class="soot-sprite focus:outline-none p-1"
+              title="Chạm vào chú Bồ Hóng nhỏ"
+              aria-label="Chú Bồ Hóng 1"
+            >
+              <svg width="26" height="26" viewBox="0 0 36 36">
+                <g fill="#262523">
+                  <circle cx="18" cy="18" r="11" />
+                  <path d="M18 4 L20 9 L16 9 Z M18 32 L20 27 L16 27 Z M4 18 L9 20 L9 16 Z M32 18 L27 20 L27 16 Z M8 8 L12 11 L10 13 Z M28 8 L24 11 L26 13 Z M8 28 L12 25 L10 23 Z M28 28 L24 25 L26 23 Z" />
+                </g>
+                <circle cx="14.5" cy="17" r="3" fill="#FFFDF7" />
+                <circle cx="21.5" cy="17" r="3" fill="#FFFDF7" />
+                <circle cx="15.2" cy="17" r="1.2" fill="#181715" />
+                <circle cx="22.2" cy="17" r="1.2" fill="#181715" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onclick="pokeSootSprite(this, 1)"
+              class="soot-sprite focus:outline-none p-1"
+              title="Chạm vào chú Bồ Hóng mang kẹo sao"
+              aria-label="Chú Bồ Hóng 2"
+            >
+              <svg width="24" height="24" viewBox="0 0 36 36">
+                <g fill="#262523">
+                  <circle cx="18" cy="19" r="10" />
+                  <path d="M18 6 L20 11 L16 11 Z M18 32 L20 27 L16 27 Z M6 19 L11 21 L11 17 Z M30 19 L25 21 L25 17 Z" />
+                </g>
+                <circle cx="15" cy="18" r="2.8" fill="#FFFDF7" />
+                <circle cx="21" cy="18" r="2.8" fill="#FFFDF7" />
+                <circle cx="15" cy="18" r="1.1" fill="#181715" />
+                <circle cx="21" cy="18" r="1.1" fill="#181715" />
+                <polygon points="29,7 30.5,10 34,10.5 31.3,12.7 32,16 29,14.2 26,16 26.7,12.7 24,10.5 27.5,10" fill="#F2C864" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onclick="pokeSootSprite(this, 2)"
+              class="soot-sprite focus:outline-none p-1"
+              title="Chạm vào chú Bồ Hóng ham đọc"
+              aria-label="Chú Bồ Hóng 3"
+            >
+              <svg width="22" height="22" viewBox="0 0 36 36">
+                <g fill="#262523">
+                  <circle cx="18" cy="18" r="9.5" />
+                  <path d="M18 6 L19.5 10 L16.5 10 Z M18 30 L19.5 26 L16.5 26 Z M6 18 L10 19.5 L10 16.5 Z M30 18 L26 19.5 L26 16.5 Z" />
+                </g>
+                <circle cx="15" cy="17.5" r="2.6" fill="#FFFDF7" />
+                <circle cx="21" cy="17.5" r="2.6" fill="#FFFDF7" />
+                <circle cx="14.5" cy="17.5" r="1" fill="#181715" />
+                <circle cx="20.5" cy="17.5" r="1" fill="#181715" />
+              </svg>
+            </button>
+          </div>
+
+          <a href="#rss" onclick="showToast('Đã sao chép liên kết RSS Feed 🌿'); return false;" class="hover:text-primary-g underline underline-offset-4 transition-colors font-semibold">
+            RSS
+          </a>
+          <a href="#email" onclick="showToast('Hộp thư: thu@ghichepbenhien.vn ✉️'); return false;" class="hover:text-primary-g underline underline-offset-4 transition-colors font-semibold">
+            Thư tín
+          </a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- KHUNG CẢNH ĐỒI CỎ, CÂY CỔ THỤ & NGÔI NHÀ GỖ VẼ TAY Ở CHÂN TRANG -->
+  <div class="w-full relative z-10 pointer-events-none -mt-6 overflow-hidden" aria-hidden="true">
+    <svg class="w-full h-32 sm:h-48 block" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax slice">
+      <!-- Đồi xa -->
+      <path d="M0 155 Q 260 85 540 135 T 1120 120 Q 1300 98 1440 135 L1440 220 L0 220 Z" style="fill: var(--hill-far); transition: fill 0.6s ease;" />
+      <!-- Đồi giữa -->
+      <path d="M0 175 Q 340 115 720 160 T 1440 150 L1440 220 L0 220 Z" style="fill: var(--hill-mid); transition: fill 0.6s ease;" />
+      <!-- Tán cây cổ thụ bên trái -->
+      <g transform="translate(185, 92)">
+        <rect x="26" y="42" width="11" height="36" rx="4" fill="#634B3A" />
+        <circle cx="32" cy="34" r="28" fill="#46724D" />
+        <circle cx="14" cy="40" r="19" fill="#538259" />
+        <circle cx="50" cy="41" r="18" fill="#3D6544" />
+      </g>
+      <!-- Ngôi nhà gỗ nhỏ nhả khói bên phải -->
+      <g transform="translate(1070, 96)">
+        <!-- Khói bay từ ống khói -->
+        <circle class="chimney-puff" cx="62" cy="4" r="6" fill="#FFFDF7" opacity="0.5" />
+        <circle class="chimney-puff-2" cx="66" cy="2" r="5" fill="#FFFDF7" opacity="0.45" />
+        <!-- Ống khói -->
+        <rect x="57" y="10" width="10" height="22" rx="2" fill="#8C5947" />
+        <!-- Thân nhà -->
+        <rect x="14" y="34" width="60" height="42" rx="3" fill="#F2E4CC" />
+        <!-- Mái ngói đỏ đất -->
+        <polygon points="6,38 44,10 82,38" fill="#B85B43" />
+        <!-- Cửa chính -->
+        <rect x="24" y="51" width="14" height="25" rx="2" fill="#78523A" />
+        <!-- Cửa sổ phát sáng vàng ấm -->
+        <rect x="46" y="47" width="18" height="16" rx="3" style="fill: var(--window-glow); transition: fill 0.6s ease;" stroke="#78523A" stroke-width="2" />
+        <line x1="55" y1="47" x2="55" y2="63" stroke="#78523A" stroke-width="1.5" />
+        <line x1="46" y1="55" x2="64" y2="55" stroke="#78523A" stroke-width="1.5" />
+      </g>
+      <!-- Đồi gần nhất -->
+      <path d="M0 190 Q 380 150 780 185 T 1440 175 L1440 220 L0 220 Z" style="fill: var(--hill-near); transition: fill 0.6s ease;" />
+    </svg>
+  </div>
+
+  <!-- THÔNG BÁO TOAST DỄ THƯƠNG -->
+  <div
+    id="toast"
+    class="fixed bottom-5 right-4 sm:bottom-6 sm:right-7 z-[85] max-w-[calc(100vw-2rem)] font-ui-ghibli text-xs sm:text-[13px] font-semibold px-4 py-3 rounded-2xl border border-soft-g bg-[var(--card-solid)] text-primary-g shadow-lg opacity-0 translate-y-2 pointer-events-none transition-all duration-300 flex items-center gap-2"
+  ></div>
+
+  <!-- =========================================================================
+       LIGHTBOX XEM ẢNH PHÓNG TO (ĐA THIẾT BỊ + MACOS QUICK LOOK SPRING)
+       ========================================================================= -->
+  <div
+    id="photo-lightbox"
+    class="ghibli-modal-shell z-[70] p-2.5 sm:p-5 lg:p-8"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-label="Xem ảnh phóng to"
+  >
+    <!-- Lớp backdrop mờ kính tách riêng để fade mượt chuẩn Apple -->
+    <div class="ghibli-modal-backdrop-layer" onclick="closeLightbox()" aria-hidden="true"></div>
+
+    <!-- Khung cửa sổ chính: 92dvh trên mobile/tablet, 84dvh (max 780px) trên laptop/desktop -->
+    <div
+      id="photo-lightbox-window"
+      class="macos-window lightbox-window-sizing w-full max-w-[1160px] flex flex-col lg:flex-row overflow-hidden rounded-2xl sm:rounded-3xl border-[1.5px] border-soft-g bg-[var(--card-solid)] shadow-2xl"
+    >
+      <!-- Nút đóng góc trên phải luôn rõ nét & dễ chạm trên màn hình cảm ứng -->
+      <button
+        type="button"
+        onclick="closeLightbox()"
+        class="photo-badge absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-30 w-9 h-9 rounded-full text-secondary-g hover:text-primary-g hover:border-[var(--accent-warm)] flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+        title="Đóng (Esc)"
+        aria-label="Đóng hộp xem ảnh"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- SÂN KHẤU ẢNH TỐI ẤM: KHOẢNG THỞ ĐỀU 4 PHÍA, KHÔNG LẸM MÉP TRÊN/DƯỚI, HỖ TRỢ VUỐT CẢM ỨNG -->
+      <div
+        id="lb-stage"
+        class="lightbox-stage lightbox-stage-sizing relative shrink-0 min-w-0 flex items-center justify-center p-4 pb-10 sm:p-7 sm:pb-11 lg:p-10 select-none overflow-hidden"
+      >
+        <!-- Nút chuyển ảnh trước -->
+        <button
+          type="button"
+          onclick="navigateLightbox(-1)"
+          class="lightbox-nav-btn absolute left-2.5 sm:left-4 lg:left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
+          title="Ảnh trước (←)"
+          aria-label="Ảnh trước"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Khung bọc ảnh đảm bảo object-contain luôn nằm gọn 100% trong vùng padding -->
+        <div class="w-full h-full flex items-center justify-center min-w-0 min-h-0 px-7 sm:px-9 lg:px-10">
+          <img
+            id="lb-img"
+            src=""
+            alt=""
+            class="max-w-full max-h-full w-auto h-auto object-contain rounded-xl shadow-[0_18px_46px_rgba(0,0,0,0.48)]"
+          />
+        </div>
+
+        <!-- Nút chuyển ảnh sau -->
+        <button
+          type="button"
+          onclick="navigateLightbox(1)"
+          class="lightbox-nav-btn absolute right-2.5 sm:right-4 lg:right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center"
+          title="Ảnh sau (→)"
+          aria-label="Ảnh sau"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- Chỉ số thứ tự ảnh tinh tế sát mép dưới sân khấu, không che chủ thể -->
+        <span
+          id="lb-counter"
+          class="absolute bottom-2.5 sm:bottom-3.5 left-1/2 -translate-x-1/2 font-mono-code text-[11px] tracking-wider px-3 py-0.5 sm:py-1 rounded-full bg-black/50 border border-white/15 text-white/90 backdrop-blur-md pointer-events-none"
+        ></span>
+      </div>
+
+      <!-- BẢNG NỘI DUNG & EXIF: CUỘN MƯỢT ĐỘC LẬP + GHIM THANH THAO TÁC DƯỚI ĐÁY -->
+      <aside class="flex-1 min-h-0 flex flex-col lg:flex-none lg:w-[390px] xl:w-[430px] lg:h-full bg-[var(--card-solid)] border-t lg:border-t-0 lg:border-l border-soft-g">
+        <!-- Phần nội dung cuộn mượt trên mọi kích thước màn hình -->
+        <div id="lb-scroll-body" class="flex-1 min-h-0 overflow-y-auto ghibli-scroll overscroll-contain p-5 sm:p-7 lg:pt-8 lg:pr-12">
+          <!-- Meta: Chủ đề & Ngày chụp -->
+          <div class="font-ui-ghibli text-xs font-semibold text-secondary-g flex flex-wrap items-center gap-2 mb-2.5 sm:mb-3">
+            <span id="lb-category" class="px-2.5 py-0.5 rounded-full bg-[var(--pill-active-bg)] text-[var(--pill-active-text)]"></span>
+            <span class="opacity-45">·</span>
+            <span id="lb-date"></span>
+          </div>
+
+          <!-- Tiêu đề bức ảnh -->
+          <h3 id="lb-title" class="font-serif-book text-[22px] sm:text-[26px] font-semibold text-primary-g leading-snug mb-2"></h3>
+
+          <!-- Địa điểm với icon SVG đồng bộ -->
+          <div class="font-ui-ghibli text-xs font-semibold text-secondary-g inline-flex items-center gap-1.5 mb-4 sm:mb-5">
+            <svg class="w-3.5 h-3.5 text-accent-green shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span id="lb-location"></span>
+          </div>
+
+          <!-- Câu chuyện sau bức ảnh -->
+          <p id="lb-story" class="font-serif-book text-[15.5px] sm:text-[16px] leading-[1.78] text-secondary-g italic mb-6 sm:mb-7"></p>
+
+          <!-- Khối EXIF tối giản chuẩn tạp chí -->
+          <div class="pt-5 border-t border-soft-g pb-2">
+            <div class="font-ui-ghibli text-[11px] font-bold uppercase tracking-widest text-secondary-g mb-4 flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-accent-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+              <span>Thông số kỹ thuật (EXIF)</span>
+            </div>
+            <dl id="lb-exif-grid" class="grid grid-cols-2 gap-x-5 gap-y-3.5"></dl>
+          </div>
+        </div>
+
+        <!-- Thanh thao tác ghim gọn gàng ở đáy hộp thoại -->
+        <div class="shrink-0 px-5 sm:px-7 py-3.5 sm:py-4 border-t border-soft-g bg-subtle-g/70 flex flex-wrap items-center justify-between gap-2.5 font-ui-ghibli text-xs font-bold">
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              id="lb-like-btn"
+              onclick="toggleLikeCurrentPhoto()"
+              class="px-3.5 py-2 rounded-full border border-soft-g bg-[var(--card-solid)] text-primary-g hover:border-[var(--accent-warm)] transition-all inline-flex items-center gap-1.5"
+            >
+              <span id="lb-like-icon" class="inline-flex items-center"></span>
+              <span id="lb-like-count">0</span>
+            </button>
+            <button
+              type="button"
+              onclick="shareCurrentPhoto()"
+              class="px-3.5 py-2 rounded-full border border-soft-g bg-[var(--card-solid)] text-primary-g hover:border-[var(--accent-green)] hover:text-accent-green transition-all inline-flex items-center gap-1.5"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Chia sẻ</span>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            id="lb-delete-btn"
+            onclick="requestDeleteCurrentPhoto()"
+            class="hidden px-3 py-2 rounded-full border border-soft-g bg-[var(--card-solid)] text-accent-warm hover:border-[var(--accent-warm)] transition-all inline-flex items-center gap-1.5"
+            title="Xóa ảnh bạn đã đăng"
+          >
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+              <path d="M10 11v6"></path>
+              <path d="M14 11v6"></path>
+            </svg>
+            <span id="lb-delete-label">Xóa ảnh</span>
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL "+ ĐĂNG ẢNH MỚI" (HEADER & FOOTER GHIM CỐ ĐỊNH, FORM CUỘN MƯỢT)
+       ========================================================================= -->
+  <div
+    id="upload-modal"
+    class="ghibli-modal-shell z-[75] p-3 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-label="Đăng ảnh mới vào Góc ảnh"
+  >
+    <!-- Lớp backdrop mờ kính tách riêng -->
+    <div class="ghibli-modal-backdrop-layer" onclick="closeUploadModal()" aria-hidden="true"></div>
+
+    <div
+      id="upload-modal-window"
+      class="macos-window upload-window-sizing w-full max-w-[600px] flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl border-[1.5px] border-soft-g bg-[var(--card-solid)] shadow-2xl"
+    >
+      <!-- Header ghim cố định -->
+      <div class="shrink-0 flex items-center justify-between gap-4 px-5 sm:px-7 py-4 sm:py-5 border-b border-soft-g bg-[var(--card-solid)]">
+        <div class="min-w-0">
+          <h3 class="font-serif-book text-xl sm:text-2xl font-semibold text-primary-g truncate">Đăng bức ảnh mới</h3>
+          <p class="font-ui-ghibli text-xs text-secondary-g mt-0.5">Lưu giữ một khoảnh khắc đẹp vào cuốn album Ghibli của bạn.</p>
+        </div>
+        <button
+          type="button"
+          onclick="closeUploadModal()"
+          class="shrink-0 w-9 h-9 rounded-full bg-subtle-g border border-soft-g text-secondary-g hover:text-accent-warm flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+          aria-label="Đóng cửa sổ đăng ảnh"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Thân form cuộn mượt độc lập -->
+      <div class="flex-1 min-h-0 overflow-y-auto ghibli-scroll overscroll-contain px-5 sm:px-7 py-5">
+        <form id="upload-photo-form" onsubmit="submitNewPhoto(event)" class="space-y-4 font-ui-ghibli text-sm">
+          <div>
+            <label class="block text-xs font-bold text-secondary-g mb-1.5">1. Chọn ảnh từ máy tính hoặc dán đường dẫn URL</label>
+            <div
+              id="upload-drop-zone"
+              onclick="document.getElementById('upload-file-input').click()"
+              class="border-2 border-dashed border-soft-g rounded-2xl p-4 text-center bg-subtle-g cursor-pointer hover:border-accent-green transition-all"
+            >
+              <input
+                type="file"
+                id="upload-file-input"
+                accept="image/*"
+                class="hidden"
+                onchange="handleFileSelect(event)"
+              />
+              <div id="upload-preview-empty" class="py-3">
+                <div class="text-2xl mb-1">🖼️</div>
+                <p class="text-xs font-bold text-primary-g">Kéo thả ảnh vào đây hoặc nhấn để chọn tệp</p>
+                <p class="text-[11px] text-secondary-g mt-0.5">Hỗ trợ JPG, PNG, WebP (tự động nén gọn nhẹ)</p>
+              </div>
+              <div id="upload-preview-wrap" class="hidden relative">
+                <img id="upload-preview-img" src="" alt="Xem trước ảnh" class="max-h-48 mx-auto rounded-xl object-cover border border-soft-g shadow-sm" />
+                <span class="inline-block mt-2 text-[11px] font-semibold text-accent-green">Nhấn để đổi ảnh khác</span>
+              </div>
+            </div>
+
+            <div class="mt-2.5 flex items-center gap-2">
+              <span class="text-[11px] font-bold text-secondary-g shrink-0">Hoặc URL:</span>
+              <input
+                type="url"
+                id="upload-url-input"
+                oninput="handleUrlPreview(this.value)"
+                placeholder="https://images.unsplash.com/..."
+                class="w-full px-3 py-1.5 rounded-xl border border-soft-g bg-[var(--card-solid)] text-primary-g text-xs focus:outline-none focus:border-accent-green"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label for="upload-title" class="block text-xs font-bold text-secondary-g mb-1">Tiêu đề bức ảnh *</label>
+              <input
+                type="text"
+                id="upload-title"
+                required
+                placeholder="Ví dụ: Nắng sớm qua ô cửa gỗ"
+                class="w-full px-3.5 py-2 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-medium focus:outline-none focus:border-accent-green"
+              />
+            </div>
+            <div>
+              <label for="upload-category" class="block text-xs font-bold text-secondary-g mb-1">Chủ đề album</label>
+              <select
+                id="upload-category"
+                class="w-full px-3.5 py-2 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-semibold focus:outline-none focus:border-accent-green"
+              >
+                <option value="Phố phường">Phố phường</option>
+                <option value="Thiên nhiên">Thiên nhiên</option>
+                <option value="Ánh sáng">Ánh sáng</option>
+                <option value="Đời thường">Đời thường</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label for="upload-location" class="block text-xs font-bold text-secondary-g mb-1">Địa điểm chụp</label>
+              <input
+                type="text"
+                id="upload-location"
+                placeholder="Ví dụ: Đà Lạt, Việt Nam"
+                class="w-full px-3.5 py-2 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-medium focus:outline-none focus:border-accent-green"
+              />
+            </div>
+            <div>
+              <label for="upload-camera" class="block text-xs font-bold text-secondary-g mb-1">Máy ảnh</label>
+              <input
+                type="text"
+                id="upload-camera"
+                placeholder="Fujifilm X-T5"
+                class="w-full px-3.5 py-2 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-mono-code focus:outline-none focus:border-accent-green"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <div>
+              <label for="upload-lens" class="block text-[11px] font-bold text-secondary-g mb-1">Ống kính</label>
+              <input type="text" id="upload-lens" placeholder="35mm" class="w-full px-2.5 py-1.5 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-mono-code focus:outline-none focus:border-accent-green" />
+            </div>
+            <div>
+              <label for="upload-aperture" class="block text-[11px] font-bold text-secondary-g mb-1">Khẩu độ</label>
+              <input type="text" id="upload-aperture" placeholder="f/2.0" class="w-full px-2.5 py-1.5 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-mono-code focus:outline-none focus:border-accent-green" />
+            </div>
+            <div>
+              <label for="upload-shutter" class="block text-[11px] font-bold text-secondary-g mb-1">Tốc độ</label>
+              <input type="text" id="upload-shutter" placeholder="1/500s" class="w-full px-2.5 py-1.5 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-mono-code focus:outline-none focus:border-accent-green" />
+            </div>
+            <div>
+              <label for="upload-iso" class="block text-[11px] font-bold text-secondary-g mb-1">ISO</label>
+              <input type="text" id="upload-iso" placeholder="ISO 200" class="w-full px-2.5 py-1.5 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-mono-code focus:outline-none focus:border-accent-green" />
+            </div>
+          </div>
+
+          <div>
+            <label for="upload-story" class="block text-xs font-bold text-secondary-g mb-1">Câu chuyện ngắn sau bức ảnh</label>
+            <textarea
+              id="upload-story"
+              rows="3"
+              placeholder="Khoảnh khắc ấy ánh nắng chiếu nghiêng qua tán lá, tôi vội đưa máy lên..."
+              class="w-full px-3.5 py-2.5 rounded-xl border border-soft-g bg-subtle-g text-primary-g text-xs font-medium leading-relaxed focus:outline-none focus:border-accent-green"
+            ></textarea>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer ghim cố định giúp thao tác cực tiện trên điện thoại -->
+      <div class="shrink-0 px-5 sm:px-7 py-3.5 sm:py-4 border-t border-soft-g bg-subtle-g/70 flex items-center justify-end gap-2.5 font-ui-ghibli">
+        <button
+          type="button"
+          onclick="closeUploadModal()"
+          class="px-4 py-2 rounded-full border border-soft-g bg-[var(--card-solid)] text-secondary-g hover:text-primary-g text-xs font-bold transition-colors"
+        >
+          Hủy bỏ
+        </button>
+        <button
+          type="submit"
+          form="upload-photo-form"
+          class="px-5 py-2 rounded-full bg-[var(--accent-green)] text-white text-xs font-bold shadow-sm hover:opacity-90 active:scale-95 transition-all inline-flex items-center gap-1.5"
+        >
+          <span>✨</span>
+          <span>Lưu vào Góc ảnh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       TRỢ GIÚP RENDER ẢNH BƯU THIẾP & KHỐI MÃ NGUỒN
+       ========================================================================= */
+    function renderFigure(src, fallbackText, caption) {
+      const fallbackUrl = 'https://placehold.co/800x460/F3ECDD/5E6859?text=' + encodeURIComponent(fallbackText);
+      return `
+        <figure class="postcard-figure">
+          <div class="postcard-frame">
+            <img
+              src="${src}"
+              onerror="this.onerror=null; this.src='${fallbackUrl}';"
+              alt="${caption}"
+              loading="lazy"
+            />
+          </div>
+          <figcaption class="postcard-caption">${caption}</figcaption>
+        </figure>
+      `;
+    }
+
+    function renderCodeBlock(langLabel, fileName, highlightedHtml) {
+      const uid = 'code_' + Math.random().toString(36).slice(2, 9);
+      return `
+        <div class="code-wrapper">
+          <div class="code-header">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="font-bold text-accent-green uppercase tracking-wider text-[10.5px] shrink-0">${langLabel}</span>
+              ${fileName ? `<span class="opacity-40 shrink-0">·</span><span class="font-mono-code text-[11px] truncate">${fileName}</span>` : ''}
+            </div>
+            <button
+              type="button"
+              onclick="copyCodeBlock('${uid}', this)"
+              class="shrink-0 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full border border-soft-g bg-[var(--card-solid)] hover:text-primary-g transition-colors text-[11px] font-semibold"
+              title="Sao chép đoạn mã"
+            >
+              <span>Sao chép</span>
+            </button>
+          </div>
+          <pre id="${uid}"><code>${highlightedHtml}</code></pre>
+        </div>
+      `;
+    }
+
+    /* =========================================================================
+       DỮ LIỆU 5 BÀI VIẾT GỐC (VĂN CHƯƠNG + MÃ NGUỒN ĐA NGÔN NGỮ)
+       ========================================================================= */
+    const POSTS = [
+      {
+        id: 'kien-truc-blog-tinh-voi-rust-va-markdown',
+        title: 'Xây dựng bộ máy xuất bản blog tĩnh bằng Rust và tư duy tối giản',
+        excerpt: 'Một trình biên dịch Markdown nhỏ gọn viết bằng Rust giúp biến những tệp văn bản thuần túy thành các trang sách điện tử tải tức thì trong vài mili-giây.',
+        date: '24 Th11, 2026',
+        archiveDate: '24 Th11',
+        year: '2026',
+        category: 'Kỹ thuật & Chữ nghĩa',
+        readTime: '7 phút đọc',
+        tags: ['Rust', 'Markdown', 'Static Site', 'Tối giản'],
+        languages: ['Rust', 'TOML'],
+        content: `
+          <p class="drop-cap">Khi xây dựng một ngôi nhà cho những con chữ, tôi luôn tự hỏi: liệu chúng ta có thực sự cần hàng trăm megabyte thư viện JavaScript chỉ để hiển thị vài trang văn bản tĩnh? Câu trả lời đưa tôi quay trở về với những công cụ biên dịch gọn nhẹ, nơi tốc độ và sự bền bỉ được đặt lên hàng đầu.</p>
+
+          ${renderFigure(
+            'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1000&q=80',
+            'Những cuốn sách mở trên bàn gỗ',
+            'Hình 1. Một cấu trúc dữ liệu sạch sẽ cũng giống như việc sắp xếp ngăn nắp những cuốn sách trên giá gỗ.'
+          )}
+
+          <p>Ý tưởng cốt lõi rất giản đơn: mỗi bài viết là một tệp <code>.md</code> nằm trong thư mục lưu trữ. Trình biên dịch viết bằng <strong>Rust</strong> sẽ đọc phần siêu dữ liệu (Frontmatter), tính toán thời gian đọc dựa trên số từ tiếng Việt, rồi kết xuất thành HTML tĩnh.</p>
+
+          ${renderCodeBlock(
+            'Rust',
+            'src/parser.rs',
+`<span class="tok-kw">use</span> std::fs;
+<span class="tok-kw">use</span> std::path::Path;
+
+<span class="tok-cm">/// Cấu trúc đại diện cho một trang viết trên blog</span>
+<span class="tok-kw">pub struct</span> <span class="tok-tp">Article</span> {
+    <span class="tok-kw">pub</span> title: <span class="tok-tp">String</span>,
+    <span class="tok-kw">pub</span> reading_minutes: <span class="tok-tp">usize</span>,
+    <span class="tok-kw">pub</span> body_html: <span class="tok-tp">String</span>,
+}
+
+<span class="tok-kw">pub fn</span> <span class="tok-fn">estimate_reading_time</span>(content: &amp;<span class="tok-tp">str</span>) -&gt; <span class="tok-tp">usize</span> {
+    <span class="tok-kw">let</span> word_count = content.split_whitespace().count();
+    <span class="tok-cm">// Tốc độ đọc trung bình khoảng 220 từ mỗi phút</span>
+    (word_count / <span class="tok-num">220</span>).max(<span class="tok-num">1</span>)
+}`
+          )}
+
+          <blockquote>
+            “Mã nguồn đẹp là mã nguồn mà mười năm sau mở lại, ta vẫn có thể đọc hiểu như đang đọc một đoạn văn xuôi mạch lạc.”
+          </blockquote>
+
+          <div class="leaf-ornament" aria-hidden="true">🌿 ✦ 🌿</div>
+
+          <h2>Tách biệt nội dung khỏi hình thức trình bày</h2>
+          <p>Nhờ lưu trữ toàn bộ bài viết dưới dạng văn bản thuần, bạn có thể dễ dàng sao lưu trên Git hoặc đổi sang bất kỳ giao diện nào trong tương lai mà không bao giờ lo mất dữ liệu.</p>
+
+          ${renderCodeBlock(
+            'TOML',
+            'content/bai-viet-dau-tien.toml',
+`<span class="tok-cm"># Siêu dữ liệu gọn nhẹ cho từng bài viết</span>
+title = <span class="tok-str">"Mùi giấy cũ và thói quen đọc chậm"</span>
+published_at = <span class="tok-str">"2026-11-22"</span>
+paper_tone = <span class="tok-str">"meadow"</span>
+tags = [<span class="tok-str">"Sách"</span>, <span class="tok-str">"Đọc chậm"</span>]`
+          )}
+        `
+      },
+      {
+        id: 'tu-dong-hoa-ghi-chu-bang-python-va-sqlite',
+        title: 'Gạn lọc tri thức từ sổ tay hằng ngày bằng Python và SQLite FTS5',
+        excerpt: 'Kết hợp sức mạnh tìm kiếm toàn văn (Full-Text Search) của SQLite với vài chục dòng Python để biến kho ghi chú cá nhân thành một cuốn từ điển tra cứu tức thì.',
+        date: '18 Th11, 2026',
+        archiveDate: '18 Th11',
+        year: '2026',
+        category: 'Dữ liệu & Ghi chép',
+        readTime: '6 phút đọc',
+        tags: ['Python', 'SQLite', 'SQL', 'PKM'],
+        languages: ['Python', 'SQL'],
+        content: `
+          <p class="drop-cap">Sau nhiều năm ghi chép lại những trích dẫn hay từ sách và những ý tưởng chợt đến bên tách trà sáng, thư mục ghi chú của tôi đã lên tới hơn hai nghìn tệp nhỏ. Vấn đề không còn là viết thêm nữa, mà là làm sao tìm lại đúng câu chữ mình từng tâm đắc chỉ trong chớp mắt.</p>
+
+          ${renderFigure(
+            'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1000&q=80',
+            'Bàn viết với sổ tay và bút mực',
+            'Hình 2. Những trang sổ tay viết tay được số hóa và lập chỉ mục để tra cứu xuyên suốt nhiều năm.'
+          )}
+
+          <p>Thay vì cài đặt những hệ quản trị cơ sở dữ liệu cồng kềnh, <strong>SQLite</strong> tích hợp sẵn bộ máy tìm kiếm toàn văn <code>FTS5</code> cho phép đánh chỉ mục hàng nghìn trang viết trong một tệp duy nhất nặng chưa tới vài megabyte.</p>
+
+          ${renderCodeBlock(
+            'SQL',
+            'schema.sql',
+`<span class="tok-cm">-- Tạo bảng ảo FTS5 hỗ trợ tìm kiếm toàn văn cực nhanh</span>
+<span class="tok-kw">CREATE VIRTUAL TABLE IF NOT EXISTS</span> notes_index <span class="tok-kw">USING</span> fts5(
+    slug,
+    title,
+    content,
+    tokenize = <span class="tok-str">'unicode61 remove_diacritics 1'</span>
+);
+
+<span class="tok-cm">-- Truy vấn xếp hạng theo độ liên quan BM25</span>
+<span class="tok-kw">SELECT</span> slug, title, snippet(notes_index, <span class="tok-num">2</span>, <span class="tok-str">'['</span>, <span class="tok-str">']'</span>, <span class="tok-str">'...'</span>, <span class="tok-num">18</span>)
+<span class="tok-kw">FROM</span> notes_index
+<span class="tok-kw">WHERE</span> notes_index <span class="tok-kw">MATCH</span> <span class="tok-str">'giấy cổ OR typography'</span>
+<span class="tok-kw">ORDER BY</span> bm25(notes_index) <span class="tok-kw">LIMIT</span> <span class="tok-num">5</span>;`
+          )}
+
+          <p>Tiếp theo, một kịch bản <strong>Python</strong> nhỏ sẽ quét qua thư mục bài viết mỗi khi có thay đổi và cập nhật lại bảng chỉ mục này:</p>
+
+          ${renderCodeBlock(
+            'Python',
+            'indexer.py',
+`<span class="tok-kw">import</span> sqlite3
+<span class="tok-kw">from</span> pathlib <span class="tok-kw">import</span> Path
+
+<span class="tok-kw">def</span> <span class="tok-fn">sync_notes_to_sqlite</span>(notes_dir: <span class="tok-tp">str</span>, db_path: <span class="tok-tp">str</span>) -&gt; <span class="tok-kw">None</span>:
+    conn = sqlite3.connect(db_path)
+    <span class="tok-kw">with</span> conn:
+        conn.execute(<span class="tok-str">"DELETE FROM notes_index"</span>)
+        <span class="tok-kw">for</span> md_file <span class="tok-kw">in</span> Path(notes_dir).glob(<span class="tok-str">"*.md"</span>):
+            text = md_file.read_text(encoding=<span class="tok-str">"utf-8"</span>)
+            title = text.splitlines()[<span class="tok-num">0</span>].lstrip(<span class="tok-str">"# "</span>)
+            conn.execute(
+                <span class="tok-str">"INSERT INTO notes_index (slug, title, content) VALUES (?, ?, ?)"</span>,
+                (md_file.stem, title, text),
+            )
+    conn.close()`
+          )}
+
+          <div class="leaf-ornament" aria-hidden="true">🍃</div>
+          <p>Chỉ với chưa đầy ba mươi dòng mã, kho lưu trữ cá nhân đã có khả năng tìm kiếm không dấu lẫn có dấu mượt mà như một cuốn mục lục thư viện cổ điển.</p>
+        `
+      },
+      {
+        id: 'xay-dung-api-doc-sach-voi-go-va-typescript',
+        title: 'Thiết kế giao diện đọc sách bằng TypeScript và dịch vụ Go siêu nhẹ',
+        excerpt: 'Cách kết hợp sự chặt chẽ của TypeScript ở tầng hiển thị và tính đồng thời gọn gàng của Go ở tầng máy chủ để phục vụ trải nghiệm đọc không độ trễ.',
+        date: '11 Th11, 2026',
+        archiveDate: '11 Th11',
+        year: '2026',
+        category: 'Phát triển Web',
+        readTime: '6 phút đọc',
+        tags: ['TypeScript', 'Go', 'Typography', 'UI'],
+        languages: ['TypeScript', 'Go'],
+        content: `
+          <p class="drop-cap">Một giao diện blog mang hơi hướng sách in đòi hỏi sự chăm chút tỉ mỉ ở từng chi tiết nhỏ: từ việc ghi nhớ tông màu người đọc ưa thích, cho tới việc tải trước bài viết kế tiếp để thao tác lật trang diễn ra liền mạch.</p>
+
+          ${renderFigure(
+            'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1000&q=80',
+            'Không gian thư viện cổ kính yên tĩnh',
+            'Hình 3. Ánh sáng ấm và bố cục rõ ràng giúp đôi mắt thư giãn suốt hàng giờ đọc liên tục.'
+          )}
+
+          <p>Ở phía trình duyệt, chúng ta dùng <strong>TypeScript</strong> để định nghĩa rõ ràng các sắc độ thời gian và áp dụng biến CSS an toàn kiểu dữ liệu:</p>
+
+          ${renderCodeBlock(
+            'TypeScript',
+            'themeManager.ts',
+`<span class="tok-kw">export type</span> <span class="tok-tp">GhibliTheme</span> = <span class="tok-str">'meadow'</span> | <span class="tok-str">'sunset'</span> | <span class="tok-str">'starlight'</span>;
+
+<span class="tok-kw">interface</span> <span class="tok-tp">ThemePalette</span> {
+  paper: <span class="tok-tp">string</span>;
+  ink: <span class="tok-tp">string</span>;
+  accent: <span class="tok-tp">string</span>;
+}
+
+<span class="tok-kw">const</span> PALETTES: <span class="tok-tp">Record</span>&lt;<span class="tok-tp">GhibliTheme</span>, <span class="tok-tp">ThemePalette</span>&gt; = {
+  meadow:    { paper: <span class="tok-str">'#FEFAF0'</span>, ink: <span class="tok-str">'#2F362C'</span>, accent: <span class="tok-str">'#4C7C59'</span> },
+  sunset:    { paper: <span class="tok-str">'#FFF8EE'</span>, ink: <span class="tok-str">'#3A2A22'</span>, accent: <span class="tok-str">'#C2593F'</span> },
+  starlight: { paper: <span class="tok-str">'#1E273B'</span>, ink: <span class="tok-str">'#EAE5D6'</span>, accent: <span class="tok-str">'#88C097'</span> },
+};
+
+<span class="tok-kw">export function</span> <span class="tok-fn">applyTheme</span>(theme: <span class="tok-tp">GhibliTheme</span>): <span class="tok-kw">void</span> {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem(<span class="tok-str">'ghibli-blog-theme'</span>, theme);
+}`
+          )}
+
+          <p>Trong khi đó, ở tầng máy chủ phân phối nội dung RSS và danh sách bài viết, một HTTP handler viết bằng <strong>Go</strong> chỉ tiêu tốn vài megabyte RAM:</p>
+
+          ${renderCodeBlock(
+            'Go',
+            'cmd/server/main.go',
+`<span class="tok-kw">package</span> main
+
+<span class="tok-kw">import</span> (
+\t<span class="tok-str">"encoding/json"</span>
+\t<span class="tok-str">"net/http"</span>
+)
+
+<span class="tok-kw">type</span> <span class="tok-tp">PostMeta</span> <span class="tok-kw">struct</span> {
+\tSlug     <span class="tok-tp">string</span> <span class="tok-str">&#96;json:"slug"&#96;</span>
+\tTitle    <span class="tok-tp">string</span> <span class="tok-str">&#96;json:"title"&#96;</span>
+\tReadTime <span class="tok-tp">int</span>    <span class="tok-str">&#96;json:"read_time"&#96;</span>
+}
+
+<span class="tok-kw">func</span> <span class="tok-fn">postsHandler</span>(w http.ResponseWriter, r *http.Request) {
+\tw.Header().Set(<span class="tok-str">"Content-Type"</span>, <span class="tok-str">"application/json; charset=utf-8"</span>)
+\tw.Header().Set(<span class="tok-str">"Cache-Control"</span>, <span class="tok-str">"public, max-age=3600"</span>)
+\tjson.NewEncoder(w).Encode(loadPublishedPosts())
+}`
+          )}
+        `
+      },
+      {
+        id: 'mui-giay-cu-va-thoi-quen-doc-cham',
+        title: 'Mùi giấy cũ và thói quen đọc chậm giữa những ngày vội vã',
+        excerpt: 'Có những trang sách ngả màu vàng nâu không chỉ lưu giữ con chữ của tác giả, mà còn giữ lại cả nhịp thở khoan thai của một thời chưa có tiếng chuông thông báo.',
+        date: '02 Th11, 2026',
+        archiveDate: '02 Th11',
+        year: '2026',
+        category: 'Tản văn & Sách',
+        readTime: '5 phút đọc',
+        tags: ['Giấy cũ', 'Đọc chậm', 'Tĩnh lặng'],
+        languages: [],
+        content: `
+          <p class="drop-cap">Mỗi lần mở một cuốn sách cũ được in từ vài thập kỷ trước, điều chạm tới ta đầu tiên không phải là nội dung của chương mở đầu, mà là sắc vàng ngà trầm ấm của mặt giấy cùng mùi thơm dịu của mực in đã đi qua năm tháng. Sắc giấy ấy không chói lòa như màn hình điện tử; nó dịu dàng nâng đỡ ánh nhìn, mời gọi người đọc chậm lại ngay từ dòng đầu tiên.</p>
+
+          ${renderFigure(
+            'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1000&q=80',
+            'Chồng sách cũ ngả màu thời gian',
+            'Hình 4. Sắc vàng ngà tự nhiên của những trang sách lâu năm mang lại cảm giác bình yên lạ kỳ.'
+          )}
+
+          <p>Đọc chậm không phải là đọc một cách uể oải. Đó là sự cho phép bản thân dừng lại ở cuối một đoạn văn đẹp, gấp nhẹ trang sách lại trên ngón tay trỏ, và nhìn ra ngoài hiên nhà vài phút để ý tưởng ấy kịp lắng xuống tầng sâu của ký ức.</p>
+          <blockquote>
+            “Chúng ta không đọc để đi tới trang cuối cùng; chúng ta đọc để những câu chữ trên đường đi kịp làm thay đổi cách ta nhìn thế giới.”
+          </blockquote>
+          <div class="leaf-ornament" aria-hidden="true">🌿</div>
+          <h2>Giữ một góc tĩnh lặng trên không gian số</h2>
+          <p>Một góc đọc lý tưởng chẳng cần kệ gỗ cầu kỳ hay ánh đèn đắt tiền. Đôi khi chỉ cần một trang giấy màu nắng dịu mắt, không có thông báo bật lên ở góc màn hình, và một khoảng thời gian ba mươi phút hoàn toàn thuộc về riêng bạn.</p>
+        `
+      },
+      {
+        id: 'it-cong-cu-hon-chieu-sau-nhieu-hon',
+        title: 'Ít công cụ hơn, chiều sâu nhiều hơn',
+        excerpt: 'Hành trình tinh giản bộ công cụ ghi chép hằng ngày để dành trọn năng lượng cho việc suy nghĩ và sáng tạo nội dung.',
+        date: '14 Th12, 2025',
+        archiveDate: '14 Th12',
+        year: '2025',
+        category: 'Sống tối giản',
+        readTime: '4 phút đọc',
+        tags: ['Tối giản số', 'Shell', 'Markdown'],
+        languages: ['Bash'],
+        content: `
+          <p class="drop-cap">Có một giai đoạn tôi dành nhiều thời gian để sắp xếp các thư mục ghi chú và thử nghiệm ứng dụng mới hơn là thực sự ngồi xuống viết một bài hoàn chỉnh. Sự phức tạp của công cụ đôi khi tạo ra ảo giác rằng ta đang làm việc rất năng suất.</p>
+          <p>Cuối cùng, tôi quay trở về với những tệp văn bản thuần túy và một dòng lệnh đơn giản để khởi tạo bản nháp mới mỗi sáng:</p>
+
+          ${renderCodeBlock(
+            'Bash',
+            'new-note.sh',
+`<span class="tok-cm">#!/usr/bin/env bash</span>
+<span class="tok-cm"># Tạo nhanh một trang nháp mới kèm ngày tháng hiện tại</span>
+SLUG=<span class="tok-str">"$1"</span>
+DATE=$(date +%Y-%m-%d)
+FILE=<span class="tok-str">"drafts/\${DATE}-\${SLUG}.md"</span>
+
+<span class="tok-fn">printf</span> <span class="tok-str">"# Tiêu đề bài viết\\n\\nNgày viết: %s\\n\\n"</span> <span class="tok-str">"$DATE"</span> &gt; <span class="tok-str">"$FILE"</span>
+<span class="tok-fn">echo</span> <span class="tok-str">"Đã mở trang giấy mới: $FILE"</span>`
+          )}
+
+          <p>Sự tối giản về mặt kỹ thuật hóa ra lại mở ra sự tự do lớn nhất cho tư duy.</p>
+        `
+      }
+    ];
+
+    let currentView = 'home';
+    let currentPostId = null;
+
+    /* =========================================================================
+       DỮ LIỆU MẪU "GÓC ẢNH" (8 BỨC ẢNH NGHỆ THUẬT KÈM EXIF & CÂU CHUYỆN)
+       ========================================================================= */
+    const PHOTO_CATEGORIES = ['Tất cả', 'Phố phường', 'Thiên nhiên', 'Ánh sáng', 'Đời thường'];
+
+    const DEFAULT_PHOTOS = [
+      {
+        id: 'photo-ha-noi-nang-thu',
+        title: 'Nắng sớm xuyên qua hàng sấu già',
+        category: 'Ánh sáng',
+        location: 'Phố Phan Đình Phùng, Hà Nội',
+        date: '19 Th11, 2026',
+        camera: 'Fujifilm X-T5',
+        lens: '35mm',
+        aperture: 'f/1.4',
+        shutter: '1/640s',
+        iso: 'ISO 200',
+        likes: 24,
+        washi: 'washi-green',
+        src: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&h=800&q=85',
+        story: 'Bảy giờ sáng cuối tuần, sau khi vừa đẩy xong một bản vá nhỏ lên Git, tôi xách máy đi bộ dọc vỉa hè lá rụng. Tia nắng đầu ngày xiên qua tán cây tạo nên những vệt sáng dịu như khung hình hoạt hình.'
+      },
+      {
+        id: 'photo-da-lat-suong-thong',
+        title: 'Thung lũng thông trong sương sớm',
+        category: 'Thiên nhiên',
+        location: 'Đồi chè Cầu Đất, Đà Lạt',
+        date: '08 Th11, 2026',
+        camera: 'Sony A7IV',
+        lens: '50mm',
+        aperture: 'f/2.0',
+        shutter: '1/1000s',
+        iso: 'ISO 100',
+        likes: 31,
+        washi: 'washi-gold',
+        src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&h=1120&q=85',
+        story: 'Đứng co ro trong chiếc áo khoác mỏng ở độ cao hơn một nghìn mét, chờ đúng năm phút khi mây mù tách ra để lộ những tán thông xanh thẫm nối tiếp nhau.'
+      },
+      {
+        id: 'photo-hoi-an-den-long',
+        title: 'Chiều vàng bên mái ngói rêu phong',
+        category: 'Phố phường',
+        location: 'Phố cổ Hội An, Quảng Nam',
+        date: '27 Th10, 2026',
+        camera: 'Leica Q2',
+        lens: '28mm',
+        aperture: 'f/2.0',
+        shutter: '1/250s',
+        iso: 'ISO 400',
+        likes: 19,
+        washi: 'washi-warm',
+        src: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&h=820&q=85',
+        story: 'Ánh hoàng hôn phủ lên những bức tường vàng ươm và giàn hoa giấy. Khoảnh khắc phố vừa lên đèn mà bầu trời vẫn còn giữ chút xanh thẫm.'
+      },
+      {
+        id: 'photo-goc-ca-phe-sach',
+        title: 'Tách cà phê phin và cuốn sổ tay',
+        category: 'Đời thường',
+        location: 'Quán nhỏ ngõ Tràng Tiền, Hà Nội',
+        date: '15 Th10, 2026',
+        camera: 'Fujifilm X100VI',
+        lens: '23mm',
+        aperture: 'f/2.0',
+        shutter: '1/125s',
+        iso: 'ISO 320',
+        likes: 27,
+        washi: 'washi-gold',
+        src: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&h=1060&q=85',
+        story: 'Mỗi khi cần vẽ sơ đồ kiến trúc hệ thống mới, tôi thường rời màn hình máy tính, tìm một góc bàn gỗ có nắng hắt vào và nghe tiếng giọt cà phê rơi chậm.'
+      },
+      {
+        id: 'photo-ninh-binh-song-nuoc',
+        title: 'Con đò nhỏ lướt qua vách núi đá',
+        category: 'Thiên nhiên',
+        location: 'Tràng An, Ninh Bình',
+        date: '02 Th10, 2026',
+        camera: 'Sony A7IV',
+        lens: '35mm',
+        aperture: 'f/2.8',
+        shutter: '1/800s',
+        iso: 'ISO 160',
+        likes: 22,
+        washi: 'washi-green',
+        src: 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&h=850&q=85',
+        story: 'Mặt nước phẳng lặng như tấm gương phản chiếu những dãy núi trùng điệp. Chỉ còn tiếng mái chèo khua nước đều đặn giữa không gian rộng lớn.'
+      },
+      {
+        id: 'photo-ga-tau-hoang-hon',
+        title: 'Chuyến tàu chiều qua rặng cây xanh',
+        category: 'Phố phường',
+        location: 'Đèo Hải Vân, Đà Nẵng',
+        date: '19 Th09, 2026',
+        camera: 'Fujifilm X-T5',
+        lens: '56mm',
+        aperture: 'f/1.8',
+        shutter: '1/1250s',
+        iso: 'ISO 200',
+        likes: 35,
+        washi: 'washi-warm',
+        src: 'https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1200&h=800&q=85',
+        story: 'Cảm giác ngồi chờ chuyến tàu lăn bánh qua khúc cua ven biển luôn mang lại sự háo hức lạ kỳ, giống hệt những cảnh tàu chạy trên biển trong Spirited Away.'
+      },
+      {
+        id: 'photo-cua-so-nang-chieu',
+        title: 'Vệt nắng nghiêng trên hiên gỗ cũ',
+        category: 'Ánh sáng',
+        location: 'Bắc Hà, Lào Cai',
+        date: '04 Th09, 2026',
+        camera: 'Leica Q2',
+        lens: '28mm',
+        aperture: 'f/2.8',
+        shutter: '1/400s',
+        iso: 'ISO 100',
+        likes: 18,
+        washi: 'washi-gold',
+        src: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&h=1080&q=85',
+        story: 'Bốn giờ chiều, ánh sáng trở nên mềm mại và ấm màu mật ong. Tôi thích chụp những góc nhỏ bình dị nơi thời gian dường như chậm lại vài nhịp.'
+      },
+      {
+        id: 'photo-cho-hoa-som',
+        title: 'Gánh hoa cúc họa mi ngày chớm đông',
+        category: 'Đời thường',
+        location: 'Chợ hoa Quảng Bá, Hà Nội',
+        date: '22 Th08, 2026',
+        camera: 'Fujifilm X-T5',
+        lens: '35mm',
+        aperture: 'f/1.4',
+        shutter: '1/320s',
+        iso: 'ISO 640',
+        likes: 29,
+        washi: 'washi-green',
+        src: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=960&h=960&q=85',
+        story: 'Một buổi sáng dậy thật sớm để cảm nhận nhịp sống rộn ràng mà thân thương của những người bán hoa, khi cả thành phố vẫn còn đang ngái ngủ.'
+      }
+    ];
+
+    let userPhotos = [];
+    let likedPhotoIds = [];
+    let activePhotoCategory = 'Tất cả';
+    let lightboxPhotoId = null;
+    let pendingUploadDataUrl = '';
+    let confirmDeletePending = false;
+
+    function loadPhotoState() {
+      try {
+        const savedUserPhotos = JSON.parse(localStorage.getItem('ghibli-user-photos') || '[]');
+        if (Array.isArray(savedUserPhotos)) userPhotos = savedUserPhotos;
+      } catch (e) {
+        userPhotos = [];
+      }
+
+      try {
+        const savedLikes = JSON.parse(localStorage.getItem('ghibli-liked-photos') || '[]');
+        if (Array.isArray(savedLikes)) likedPhotoIds = savedLikes;
+      } catch (e) {
+        likedPhotoIds = [];
+      }
+    }
+
+    function saveUserPhotos() {
+      try {
+        localStorage.setItem('ghibli-user-photos', JSON.stringify(userPhotos));
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function saveLikedPhotos() {
+      try {
+        localStorage.setItem('ghibli-liked-photos', JSON.stringify(likedPhotoIds));
+      } catch (e) {
+        // Bỏ qua lỗi lưu trữ
+      }
+    }
+
+    function getAllPhotos() {
+      return [...userPhotos, ...DEFAULT_PHOTOS];
+    }
+
+    function getFilteredPhotos() {
+      const all = getAllPhotos();
+      if (activePhotoCategory === 'Tất cả') return all;
+      return all.filter(p => p.category === activePhotoCategory);
+    }
+
+    function formatExifLine(photo) {
+      return [photo.camera, photo.lens, photo.aperture, photo.shutter, photo.iso]
+        .filter(Boolean)
+        .join(' · ');
+    }
+
+    function setPhotoCategory(cat) {
+      activePhotoCategory = cat;
+      render();
+    }
+
+    function updateLightboxUI() {
+      const list = currentView === 'photos' ? getFilteredPhotos() : getAllPhotos();
+      const idx = list.findIndex(p => p.id === lightboxPhotoId);
+      const photo = list[idx] || getAllPhotos().find(p => p.id === lightboxPhotoId);
+      if (!photo) return;
+
+      const fallbackUrl = 'https://placehold.co/1000x750/F3ECDD/6C5F50?text=' + encodeURIComponent(photo.title);
+      const imgEl = document.getElementById('lb-img');
+      imgEl.onerror = function () {
+        this.onerror = null;
+        this.src = fallbackUrl;
+      };
+      imgEl.src = photo.src;
+      imgEl.alt = photo.title;
+
+      document.getElementById('lb-counter').textContent = `${idx >= 0 ? idx + 1 : 1} / ${list.length}`;
+      document.getElementById('lb-category').textContent = photo.category;
+      document.getElementById('lb-location').textContent = photo.location;
+      document.getElementById('lb-date').textContent = photo.date;
+      document.getElementById('lb-title').textContent = photo.title;
+      document.getElementById('lb-story').textContent = photo.story || 'Một khoảnh khắc lặng lẽ được giữ lại qua ống kính.';
+
+      // Cuộn phần thông tin EXIF về đầu mỗi khi chuyển sang ảnh mới
+      const scrollBody = document.getElementById('lb-scroll-body');
+      if (scrollBody) scrollBody.scrollTop = 0;
+
+      const isLiked = likedPhotoIds.includes(photo.id);
+      const displayLikes = (photo.likes || 0) + (isLiked ? 1 : 0);
+      const likeBtn = document.getElementById('lb-like-btn');
+      const likeIcon = document.getElementById('lb-like-icon');
+
+      if (isLiked) {
+        likeBtn.classList.add('like-btn-active');
+        likeIcon.innerHTML = `<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+      } else {
+        likeBtn.classList.remove('like-btn-active');
+        likeIcon.innerHTML = `<svg class="w-4 h-4 text-secondary-g" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+      }
+      document.getElementById('lb-like-count').textContent = displayLikes;
+
+      const deleteBtn = document.getElementById('lb-delete-btn');
+      const deleteLabel = document.getElementById('lb-delete-label');
+      if (photo.userAdded) {
+        deleteBtn.classList.remove('hidden');
+        deleteLabel.textContent = confirmDeletePending ? 'Bấm lần nữa để xóa' : 'Xóa ảnh';
+      } else {
+        deleteBtn.classList.add('hidden');
+      }
+
+      const exifItems = [
+        { label: 'Máy ảnh', value: photo.camera || '—', full: true },
+        { label: 'Ống kính', value: photo.lens || '—' },
+        { label: 'Khẩu độ', value: photo.aperture || '—' },
+        { label: 'Tốc độ màn trập', value: photo.shutter || '—' },
+        { label: 'Độ nhạy sáng', value: photo.iso || '—' }
+      ];
+
+      document.getElementById('lb-exif-grid').innerHTML = exifItems.map(item => `
+        <div class="${item.full ? 'col-span-2 pb-2.5 border-b border-soft-g/70' : ''}">
+          <dt class="font-ui-ghibli text-[10.5px] font-semibold uppercase tracking-wider text-secondary-g mb-0.5">${item.label}</dt>
+          <dd class="font-mono-code text-[13px] font-medium text-primary-g truncate" title="${item.value}">${item.value}</dd>
+        </div>
+      `).join('');
+    }
+
+    function toggleLikeCurrentPhoto() {
+      if (!lightboxPhotoId) return;
+      const idx = likedPhotoIds.indexOf(lightboxPhotoId);
+      if (idx >= 0) {
+        likedPhotoIds.splice(idx, 1);
+      } else {
+        likedPhotoIds.push(lightboxPhotoId);
+        showToast('Đã thả tim cho khung hình này ❤️');
+      }
+      saveLikedPhotos();
+      updateLightboxUI();
+      if (currentView === 'photos') render();
+    }
+
+    function shareCurrentPhoto() {
+      const photo = getAllPhotos().find(p => p.id === lightboxPhotoId);
+      if (!photo) return;
+      const shareUrl = `${window.location.href.split('#')[0]}#photo/${photo.id}`;
+      const ta = document.createElement('textarea');
+      ta.value = shareUrl;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`Đã sao chép liên kết ảnh "${photo.title}" 🔗`);
+      } catch (e) {
+        showToast('Đã sẵn sàng chia sẻ khung hình này 🌿');
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+
+    function requestDeleteCurrentPhoto() {
+      if (!lightboxPhotoId) return;
+      if (!confirmDeletePending) {
+        confirmDeletePending = true;
+        updateLightboxUI();
+        showToast('Bấm nút Xóa ảnh thêm một lần nữa để xác nhận');
+        return;
+      }
+      userPhotos = userPhotos.filter(p => p.id !== lightboxPhotoId);
+      saveUserPhotos();
+      closeLightbox();
+      render();
+      showToast('Đã gỡ bức ảnh khỏi Góc ảnh 🍃');
+    }
+
+    /* =========================================================================
+       HIỆU ỨNG ĐÓNG/MỞ POPUP CHUẨN MACOS QUICK LOOK / SEQUOIA SPRING
+       ========================================================================= */
+    let lightboxCloseTimer = null;
+    let uploadCloseTimer = null;
+    let imageSlideTimer = null;
+
+    /**
+     * Tính toán độ lệch tâm tinh tế (giới hạn trong ±56px) giữa phần tử kích hoạt và tâm màn hình
+     * giúp cửa sổ phóng mở tự nhiên từ chính vị trí nhấn mà không bay quá đà.
+     */
+    function applyMacOSOriginOffset(winEl, triggerEl) {
+      if (!winEl) return;
+      if (triggerEl && typeof triggerEl.getBoundingClientRect === 'function') {
+        const rect = triggerEl.getBoundingClientRect();
+        const rawDx = (rect.left + rect.width / 2) - (window.innerWidth / 2);
+        const rawDy = (rect.top + rect.height / 2) - (window.innerHeight / 2);
+        const clamp = (val, limit) => Math.max(-limit, Math.min(limit, val));
+        const dx = clamp(rawDx * 0.28, 56);
+        const dy = clamp(rawDy * 0.28, 56);
+        winEl.style.setProperty('--from-x', `${dx.toFixed(1)}px`);
+        winEl.style.setProperty('--from-y', `${dy.toFixed(1)}px`);
+      } else {
+        winEl.style.setProperty('--from-x', '0px');
+        winEl.style.setProperty('--from-y', '16px');
+      }
+    }
+
+    function openLightbox(photoId, triggerEl = null) {
+      const photos = currentView === 'photos' ? getFilteredPhotos() : getAllPhotos();
+      const target = photos.find(p => p.id === photoId) || getAllPhotos().find(p => p.id === photoId);
+      if (!target) return;
+
+      clearTimeout(lightboxCloseTimer);
+      clearTimeout(imageSlideTimer);
+      lightboxPhotoId = target.id;
+      confirmDeletePending = false;
+
+      const imgEl = document.getElementById('lb-img');
+      if (imgEl) {
+        imgEl.style.opacity = '1';
+        imgEl.style.transform = 'translate3d(0, 0, 0)';
+      }
+
+      updateLightboxUI();
+
+      const modal = document.getElementById('photo-lightbox');
+      const win = document.getElementById('photo-lightbox-window');
+      applyMacOSOriginOffset(win, triggerEl);
+
+      modal.classList.remove('is-closing', 'is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      // Đảm bảo trình duyệt nhận trạng thái ban đầu trước khi kích hoạt spring transition
+      void win.offsetWidth;
+      requestAnimationFrame(() => {
+        modal.classList.add('is-open');
+      });
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('photo-lightbox');
+      if (!modal || !modal.classList.contains('is-open')) return;
+
+      modal.classList.remove('is-open');
+      modal.classList.add('is-closing');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      clearTimeout(lightboxCloseTimer);
+      lightboxCloseTimer = setTimeout(() => {
+        modal.classList.remove('is-closing');
+        lightboxPhotoId = null;
+        confirmDeletePending = false;
+      }, 240);
+    }
+
+    /**
+     * Chuyển ảnh kế tiếp/trước đó với hiệu ứng trượt nhẹ ±16px + fade mượt 240ms
+     */
+    function navigateLightbox(step) {
+      const list = currentView === 'photos' ? getFilteredPhotos() : getAllPhotos();
+      if (!list.length) return;
+      const idx = list.findIndex(p => p.id === lightboxPhotoId);
+      const nextIdx = (idx + step + list.length) % list.length;
+      lightboxPhotoId = list[nextIdx].id;
+      confirmDeletePending = false;
+
+      const imgEl = document.getElementById('lb-img');
+      const directionOffset = step > 0 ? 16 : -16;
+
+      clearTimeout(imageSlideTimer);
+      // Ẩn và dịch nhẹ về hướng mới ngay lập tức, sau đó trượt mượt về tâm
+      imgEl.style.transition = 'none';
+      imgEl.style.opacity = '0';
+      imgEl.style.transform = `translate3d(${directionOffset}px, 0, 0)`;
+
+      updateLightboxUI();
+
+      void imgEl.offsetWidth;
+      imgEl.style.transition = '';
+      requestAnimationFrame(() => {
+        imgEl.style.opacity = '1';
+        imgEl.style.transform = 'translate3d(0, 0, 0)';
+      });
+    }
+
+    /**
+     * Hỗ trợ vuốt cảm ứng trái/phải (touch swipe) trên sân khấu ảnh cho điện thoại & tablet
+     */
+    function initLightboxTouchSwipe() {
+      const stage = document.getElementById('lb-stage');
+      if (!stage) return;
+
+      let startX = 0;
+      let startY = 0;
+      let isTracking = false;
+
+      stage.addEventListener('touchstart', (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isTracking = true;
+      }, { passive: true });
+
+      stage.addEventListener('touchmove', (e) => {
+        if (!isTracking || !e.touches || e.touches.length !== 1) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        // Nếu người dùng đang vuốt dọc thì bỏ theo dõi để không cản cuộn tự nhiên
+        if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 20) {
+          isTracking = false;
+        }
+      }, { passive: true });
+
+      stage.addEventListener('touchend', (e) => {
+        if (!isTracking || !e.changedTouches || e.changedTouches.length !== 1) return;
+        isTracking = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        // Ngưỡng vuốt ngang rõ ràng (> 42px)
+        if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+          if (dx < 0) {
+            navigateLightbox(1);
+          } else {
+            navigateLightbox(-1);
+          }
+        }
+      }, { passive: true });
+    }
+
+    /* =========================================================================
+       MODAL "+ ĐĂNG ẢNH MỚI" (CHỌN FILE / KÉO THẢ / DÁN URL)
+       ========================================================================= */
+    function openUploadModal(triggerEl = null) {
+      clearTimeout(uploadCloseTimer);
+      pendingUploadDataUrl = '';
+      document.getElementById('upload-photo-form').reset();
+      document.getElementById('upload-preview-empty').classList.remove('hidden');
+      document.getElementById('upload-preview-wrap').classList.add('hidden');
+      document.getElementById('upload-preview-img').src = '';
+
+      const modal = document.getElementById('upload-modal');
+      const win = document.getElementById('upload-modal-window');
+      applyMacOSOriginOffset(win, triggerEl);
+
+      modal.classList.remove('is-closing', 'is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      void win.offsetWidth;
+      requestAnimationFrame(() => {
+        modal.classList.add('is-open');
+      });
+    }
+
+    function closeUploadModal() {
+      const modal = document.getElementById('upload-modal');
+      if (!modal || !modal.classList.contains('is-open')) return;
+
+      modal.classList.remove('is-open');
+      modal.classList.add('is-closing');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      clearTimeout(uploadCloseTimer);
+      uploadCloseTimer = setTimeout(() => {
+        modal.classList.remove('is-closing');
+      }, 240);
+    }
+
+    function showUploadPreview(src) {
+      const emptyEl = document.getElementById('upload-preview-empty');
+      const wrapEl = document.getElementById('upload-preview-wrap');
+      const imgEl = document.getElementById('upload-preview-img');
+      if (!src) {
+        emptyEl.classList.remove('hidden');
+        wrapEl.classList.add('hidden');
+        imgEl.src = '';
+        return;
+      }
+      imgEl.src = src;
+      emptyEl.classList.add('hidden');
+      wrapEl.classList.remove('hidden');
+    }
+
+    function processImageFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Vui lòng chọn tệp hình ảnh hợp lệ (JPG, PNG, WebP)');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          // Nén ảnh gọn nhẹ (tối đa 1280px) để lưu ổn định trong localStorage
+          const maxSide = 1280;
+          let width = img.width;
+          let height = img.height;
+          if (width > maxSide || height > maxSide) {
+            if (width >= height) {
+              height = Math.round((height * maxSide) / width);
+              width = maxSide;
+            } else {
+              width = Math.round((width * maxSide) / height);
+              height = maxSide;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          try {
+            pendingUploadDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          } catch (err) {
+            pendingUploadDataUrl = ev.target.result;
+          }
+          document.getElementById('upload-url-input').value = '';
+          showUploadPreview(pendingUploadDataUrl);
+        };
+        img.onerror = () => {
+          showToast('Không thể đọc tệp ảnh này');
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files && event.target.files[0];
+      if (file) processImageFile(file);
+    }
+
+    function handleUrlPreview(url) {
+      const trimmed = (url || '').trim();
+      if (trimmed) {
+        pendingUploadDataUrl = '';
+        showUploadPreview(trimmed);
+      } else if (!pendingUploadDataUrl) {
+        showUploadPreview('');
+      }
+    }
+
+    function initUploadDropZone() {
+      const zone = document.getElementById('upload-drop-zone');
+      if (!zone) return;
+
+      ['dragenter', 'dragover'].forEach(evtName => {
+        zone.addEventListener(evtName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          zone.classList.add('drop-zone-active');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(evtName => {
+        zone.addEventListener(evtName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          zone.classList.remove('drop-zone-active');
+        });
+      });
+
+      zone.addEventListener('drop', (e) => {
+        const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file) processImageFile(file);
+      });
+    }
+
+    function submitNewPhoto(event) {
+      event.preventDefault();
+
+      const urlInput = document.getElementById('upload-url-input').value.trim();
+      const imageSrc = pendingUploadDataUrl || urlInput;
+      if (!imageSrc) {
+        showToast('Hãy chọn một tệp ảnh hoặc dán đường dẫn URL nhé!');
+        return;
+      }
+
+      const title = document.getElementById('upload-title').value.trim();
+      if (!title) {
+        showToast('Hãy đặt một tiêu đề cho bức ảnh nhé!');
+        return;
+      }
+
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+      const washiStyles = ['washi-green', 'washi-warm', 'washi-gold'];
+
+      const newPhoto = {
+        id: 'user-photo-' + Date.now(),
+        title: title,
+        category: document.getElementById('upload-category').value || 'Đời thường',
+        location: document.getElementById('upload-location').value.trim() || 'Một góc nhỏ bình yên',
+        date: `${day} Th${month}, ${year}`,
+        camera: document.getElementById('upload-camera').value.trim() || 'Máy ảnh cá nhân',
+        lens: document.getElementById('upload-lens').value.trim() || '35mm',
+        aperture: document.getElementById('upload-aperture').value.trim() || 'f/2.0',
+        shutter: document.getElementById('upload-shutter').value.trim() || '1/250s',
+        iso: document.getElementById('upload-iso').value.trim() || 'ISO 200',
+        story: document.getElementById('upload-story').value.trim() || 'Một khoảnh khắc đáng nhớ vừa được lưu lại.',
+        likes: 0,
+        washi: washiStyles[userPhotos.length % washiStyles.length],
+        src: imageSrc,
+        userAdded: true
+      };
+
+      userPhotos.unshift(newPhoto);
+      if (!saveUserPhotos()) {
+        userPhotos.shift();
+        showToast('Bộ nhớ trình duyệt đã đầy, hãy thử dùng ảnh nhẹ hơn hoặc dán URL');
+        return;
+      }
+
+      activePhotoCategory = 'Tất cả';
+      closeUploadModal();
+      if (currentView !== 'photos') {
+        navigateTo('photos');
+      } else {
+        render();
+      }
+      showToast('Đã lưu bức ảnh mới vào Góc ảnh ✨');
+    }
+
+    /* =========================================================================
+       1. QUẢN LÝ 3 CHẾ ĐỘ THỜI GIAN STUDIO GHIBLI
+       ========================================================================= */
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('ghibli-blog-theme', theme);
+      } catch (e) {}
+
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.style.backgroundColor = 'transparent';
+        btn.style.color = 'var(--text-secondary)';
+        btn.style.boxShadow = 'none';
+      });
+
+      const activeBtn = document.getElementById('btn-' + theme);
+      if (activeBtn) {
+        activeBtn.style.backgroundColor = 'var(--card-solid)';
+        activeBtn.style.color = 'var(--text-primary)';
+        activeBtn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.08)';
+      }
+
+      renderParticles(theme);
+    }
+
+    /* =========================================================================
+       2. HIỆU ỨNG SAO ĐÊM & HẠT BAY TỰ NHIÊN
+       ========================================================================= */
+    function initStars() {
+      const layer = document.getElementById('stars-layer');
+      if (!layer) return;
+      let html = '';
+      for (let i = 0; i < 42; i++) {
+        const left = (Math.random() * 100).toFixed(2);
+        const top = (Math.random() * 68).toFixed(2);
+        const size = (1.5 + Math.random() * 2.5).toFixed(1);
+        const delay = (Math.random() * 4).toFixed(2);
+        html += `<span class="star-dot" style="left:${left}%;top:${top}%;width:${size}px;height:${size}px;animation-delay:${delay}s;"></span>`;
+      }
+      layer.innerHTML = html;
+    }
+
+    function renderParticles(theme) {
+      const layer = document.getElementById('particles-layer');
+      if (!layer) return;
+
+      const count = 14;
+      let html = '';
+      for (let i = 0; i < count; i++) {
+        const left = (Math.random() * 96).toFixed(1);
+        const duration = (14 + Math.random() * 16).toFixed(1);
+        const delay = (-Math.random() * 20).toFixed(1);
+        const size = theme === 'starlight'
+          ? (4 + Math.random() * 4).toFixed(1)
+          : (5 + Math.random() * 5).toFixed(1);
+
+        let color = 'rgba(255, 253, 245, 0.85)';
+        let shadow = '0 0 6px rgba(255, 255, 255, 0.5)';
+
+        if (theme === 'sunset') {
+          color = i % 2 === 0 ? 'rgba(235, 165, 92, 0.82)' : 'rgba(218, 114, 82, 0.78)';
+          shadow = 'none';
+        } else if (theme === 'starlight') {
+          color = 'rgba(246, 232, 134, 0.92)';
+          shadow = '0 0 10px 2px rgba(246, 232, 134, 0.65)';
+        }
+
+        html += `<span class="float-particle" style="left:${left}%;width:${size}px;height:${size}px;background:${color};box-shadow:${shadow};animation-duration:${duration}s;animation-delay:${delay}s;"></span>`;
+      }
+      layer.innerHTML = html;
+    }
+
+    /* =========================================================================
+       3. TƯƠNG TÁC VỚI BỒ HÓNG & SAO CHÉP MÃ NGUỒN
+       ========================================================================= */
+    const SOOT_MESSAGES = [
+      'Bồ Hóng nhỏ vừa nhảy cẫng lên chào bạn! ✨',
+      'Chú Bồ Hóng tặng bạn một viên kẹo sao Konpeito ⭐',
+      'Bồ Hóng đang trông coi kho sách bên hiên giúp bạn 🌿'
+    ];
+
+    function pokeSootSprite(el, idx) {
+      el.classList.remove('soot-bounce');
+      void el.offsetWidth;
+      el.classList.add('soot-bounce');
+      showToast(SOOT_MESSAGES[idx % SOOT_MESSAGES.length]);
+    }
+
+    function copyCodeBlock(preId, buttonEl) {
+      const preEl = document.getElementById(preId);
+      if (!preEl) return;
+      const text = preEl.innerText;
+
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      try {
+        document.execCommand('copy');
+        const labelSpan = buttonEl.querySelector('span');
+        const originalText = labelSpan.textContent;
+        labelSpan.textContent = 'Đã chép ✓';
+        buttonEl.style.color = 'var(--accent-green)';
+        showToast('Đã sao chép đoạn mã vào bộ nhớ tạm 🌿');
+        setTimeout(() => {
+          labelSpan.textContent = originalText;
+          buttonEl.style.color = '';
+        }, 1800);
+      } catch (err) {
+        showToast('Không thể sao chép tự động');
+      } finally {
+        document.body.removeChild(textArea);
+      }
+    }
+
+    /* =========================================================================
+       4. ĐIỀU HƯỚNG & RENDER NỘI DUNG (TỐI ƯU KHUNG RỘNG ĐA MÀN HÌNH)
+       ========================================================================= */
+    function navigateTo(view, postId = null) {
+      currentView = view;
+      currentPostId = postId;
+
+      const mainContainer = document.getElementById('main-container');
+      if (mainContainer) {
+        if (view === 'photos') {
+          mainContainer.classList.remove('max-w-[760px]');
+          mainContainer.classList.add('max-w-[960px]', 'xl:max-w-[1080px]');
+        } else {
+          mainContainer.classList.remove('max-w-[960px]', 'xl:max-w-[1080px]');
+          mainContainer.classList.add('max-w-[760px]');
+        }
+      }
+
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.style.backgroundColor = 'transparent';
+        item.style.color = 'var(--text-secondary)';
+      });
+
+      const activeNavId = view === 'post' ? 'nav-home' : 'nav-' + view;
+      const activeNav = document.getElementById(activeNavId);
+      if (activeNav) {
+        activeNav.style.backgroundColor = 'var(--pill-active-bg)';
+        activeNav.style.color = 'var(--pill-active-text)';
+      }
+
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function render() {
+      const container = document.getElementById('app-content');
+
+      if (currentView === 'home') {
+        const recentPhotos = getAllPhotos().slice(0, 3);
+
+        container.innerHTML = `
+          <div class="fade-in">
+            <section class="pb-6 sm:pb-7 mb-6 sm:mb-7 border-b border-soft-g">
+              <p class="text-[17px] sm:text-[19px] leading-relaxed text-secondary-g italic">
+                Nơi lưu giữ những tản văn về sách cũ, ghi chép kỹ thuật tối giản và những khoảng lặng bên hiên nhà.
+              </p>
+            </section>
+
+            <section class="space-y-3">
+              ${POSTS.map((post) => `
+                <article class="post-card">
+                  <a
+                    href="#post/${post.id}"
+                    onclick="navigateTo('post', '${post.id}'); return false;"
+                    class="block group"
+                  >
+                    <div class="font-ui-ghibli text-xs text-secondary-g mb-2 flex flex-wrap items-center gap-2 font-semibold">
+                      <span>${post.date}</span>
+                      <span class="opacity-50">·</span>
+                      <span>${post.readTime}</span>
+                      ${post.languages && post.languages.length > 0 ? `
+                        <span class="opacity-50">·</span>
+                        <span class="inline-flex flex-wrap gap-1.5">
+                          ${post.languages.map((lang, i) => `
+                            <span class="font-mono-code text-[11px] font-medium px-2 py-0.5 rounded-full border border-soft-g ${i % 2 === 0 ? 'text-accent-green bg-subtle-g' : 'text-accent-warm bg-subtle-g'}">
+                              ${lang}
+                            </span>
+                          `).join('')}
+                        </span>
+                      ` : ''}
+                    </div>
+                    <h2 class="post-title font-serif-book text-[19.5px] sm:text-[23.5px] font-semibold text-primary-g leading-snug mb-2 transition-colors">
+                      ${post.title}
+                    </h2>
+                    <p class="text-secondary-g text-[15.5px] sm:text-[16.5px] leading-relaxed line-clamp-2">
+                      ${post.excerpt}
+                    </p>
+                  </a>
+                </article>
+              `).join('')}
+            </section>
+
+            <!-- Dải xem trước "Khung hình mới ghé qua" kết nối sang Góc ảnh -->
+            <section class="mt-11 sm:mt-12 pt-8 sm:pt-9 border-t border-soft-g">
+              <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+                <div>
+                  <div class="font-ui-ghibli text-[11px] font-bold uppercase tracking-widest text-accent-green mb-1 flex items-center gap-1.5">
+                    <span>📷</span>
+                    <span>Góc nhiếp ảnh</span>
+                  </div>
+                  <h2 class="font-serif-book text-xl sm:text-2xl font-semibold text-primary-g">
+                    Khung hình mới ghé qua
+                  </h2>
+                </div>
+                <a
+                  href="#photos"
+                  onclick="navigateTo('photos'); return false;"
+                  class="font-ui-ghibli text-xs font-bold text-accent-green hover:text-accent-warm transition-colors inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-subtle-g border border-soft-g"
+                >
+                  <span>Xem toàn bộ Góc ảnh</span>
+                  <span>→</span>
+                </a>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                ${recentPhotos.map(photo => {
+                  const fb = 'https://placehold.co/600x450/F3ECDD/6C5F50?text=' + encodeURIComponent(photo.title);
+                  return `
+                    <div
+                      onclick="openLightbox('${photo.id}', this)"
+                      class="mini-postcard group"
+                      role="button"
+                      tabindex="0"
+                      onkeydown="if(event.key==='Enter') openLightbox('${photo.id}', this)"
+                    >
+                      <span class="washi-tape ${photo.washi || 'washi-green'}" style="width:48px;height:14px;top:-7px;"></span>
+                      <div class="aspect-[4/3] overflow-hidden rounded-xl bg-subtle-g mb-2.5">
+                        <img
+                          src="${photo.src}"
+                          onerror="this.onerror=null; this.src='${fb}';"
+                          alt="${photo.title}"
+                          loading="lazy"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          style="filter: var(--img-filter);"
+                        />
+                      </div>
+                      <h3 class="font-serif-book text-[14.5px] font-semibold text-primary-g group-hover:text-accent-green transition-colors line-clamp-1 px-1">
+                        ${photo.title}
+                      </h3>
+                      <p class="font-ui-ghibli text-[11px] text-secondary-g line-clamp-1 px-1 mt-0.5">
+                        📍 ${photo.location}
+                      </p>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </section>
+          </div>
+        `;
+      } else if (currentView === 'photos') {
+        const filteredPhotos = getFilteredPhotos();
+
+        container.innerHTML = `
+          <div class="fade-in">
+            <header class="pb-6 sm:pb-7 mb-6 sm:mb-7 border-b border-soft-g flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <div class="font-ui-ghibli text-[11px] font-bold uppercase tracking-widest text-accent-green mb-1.5 flex items-center gap-1.5">
+                  <span>🎞️</span>
+                  <span>Cuốn album bưu thiếp</span>
+                </div>
+                <h1 class="font-serif-book text-2xl sm:text-[32px] font-semibold text-primary-g leading-tight mb-2">
+                  Góc ảnh bên hiên
+                </h1>
+                <p class="text-secondary-g text-[15.5px] sm:text-[16.5px] italic max-w-xl">
+                  Ngoài những dòng mã nguồn, đây là nơi tôi gom nhặt nắng gió, phố cũ và những khoảnh khắc bình yên qua ống kính.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onclick="openUploadModal(this)"
+                class="shrink-0 self-start sm:self-end font-ui-ghibli text-xs sm:text-[13px] font-bold px-4 py-2.5 rounded-full bg-[var(--accent-green)] text-white shadow-sm hover:opacity-90 hover:-translate-y-0.5 active:scale-95 transition-all inline-flex items-center gap-1.5"
+              >
+                <span>＋</span>
+                <span>Đăng ảnh mới</span>
+              </button>
+            </header>
+
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 mb-7 sm:mb-8">
+              <div class="flex flex-nowrap sm:flex-wrap items-center gap-2 overflow-x-auto no-scrollbar pb-1 -mx-1 px-1 font-ui-ghibli text-xs font-bold" role="tablist" aria-label="Lọc ảnh theo chủ đề">
+                ${PHOTO_CATEGORIES.map(cat => {
+                  const active = activePhotoCategory === cat;
+                  return `
+                    <button
+                      type="button"
+                      onclick="setPhotoCategory('${cat}')"
+                      class="shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-full border transition-all ${
+                        active
+                          ? 'border-[var(--accent-green)] bg-[var(--pill-active-bg)] text-[var(--pill-active-text)] shadow-sm'
+                          : 'border-soft-g bg-subtle-g text-secondary-g hover:text-primary-g'
+                      }"
+                    >
+                      ${cat}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+              <span class="font-ui-ghibli text-xs font-semibold text-secondary-g shrink-0">
+                ${filteredPhotos.length} khung hình
+              </span>
+            </div>
+
+            ${filteredPhotos.length === 0 ? `
+              <div class="text-center py-14 rounded-3xl border border-dashed border-soft-g bg-subtle-g">
+                <p class="font-serif-book text-lg text-secondary-g italic mb-3">Chưa có khung hình nào trong chủ đề này.</p>
+                <button
+                  type="button"
+                  onclick="openUploadModal(this)"
+                  class="font-ui-ghibli text-xs font-bold px-4 py-2 rounded-full border border-soft-g bg-[var(--card-solid)] text-accent-green hover:opacity-85"
+                >
+                  + Thêm bức ảnh đầu tiên
+                </button>
+              </div>
+            ` : `
+              <div class="gallery-masonry">
+                ${filteredPhotos.map(photo => {
+                  const fb = 'https://placehold.co/800x600/F3ECDD/6C5F50?text=' + encodeURIComponent(photo.title);
+                  const isLiked = likedPhotoIds.includes(photo.id);
+                  const likeTotal = (photo.likes || 0) + (isLiked ? 1 : 0);
+                  return `
+                    <article
+                      onclick="openLightbox('${photo.id}', this)"
+                      class="gallery-card"
+                      role="button"
+                      tabindex="0"
+                      onkeydown="if(event.key==='Enter') openLightbox('${photo.id}', this)"
+                    >
+                      <span class="washi-tape ${photo.washi || 'washi-green'}" aria-hidden="true"></span>
+
+                      <div>
+                        <div class="gallery-photo-wrap mb-3.5">
+                          <img
+                            src="${photo.src}"
+                            onerror="this.onerror=null; this.src='${fb}';"
+                            alt="${photo.title}"
+                            loading="lazy"
+                          />
+                          <span class="photo-badge absolute top-2.5 left-2.5 font-ui-ghibli text-[10.5px] font-bold px-2.5 py-0.5 rounded-full">
+                            ${photo.category}
+                          </span>
+                          ${photo.userAdded ? `
+                            <span class="absolute top-2.5 right-2.5 font-ui-ghibli text-[10px] font-bold px-2 py-0.5 rounded-full bg-[var(--accent-warm)] text-white shadow-sm">
+                              Mới đăng
+                            </span>
+                          ` : ''}
+                        </div>
+
+                        <div class="px-1">
+                          <h2 class="font-serif-book text-[17.5px] font-semibold text-primary-g leading-snug mb-1 line-clamp-1">
+                            ${photo.title}
+                          </h2>
+                          <div class="flex items-center justify-between gap-2 font-ui-ghibli text-[11.5px] text-secondary-g font-medium mb-2.5">
+                            <span class="truncate inline-flex items-center gap-1">
+                              <svg class="w-3 h-3 text-accent-green shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                              <span class="truncate">${photo.location}</span>
+                            </span>
+                            <span class="shrink-0 font-semibold inline-flex items-center gap-1 ${isLiked ? 'text-[#C45842]' : 'text-secondary-g'}">
+                              ${isLiked
+                                ? '<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'
+                                : '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'
+                              }
+                              <span>${likeTotal}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="px-2 py-1.5 rounded-xl bg-subtle-g border border-soft-g font-mono-code text-[10.5px] text-secondary-g truncate" title="${formatExifLine(photo)}">
+                        ${formatExifLine(photo)}
+                      </div>
+                    </article>
+                  `;
+                }).join('')}
+              </div>
+            `}
+          </div>
+        `;
+      } else if (currentView === 'post') {
+        const postIndex = POSTS.findIndex(p => p.id === currentPostId);
+        const post = POSTS[postIndex] || POSTS[0];
+        const prevPost = postIndex < POSTS.length - 1 ? POSTS[postIndex + 1] : null;
+        const nextPost = postIndex > 0 ? POSTS[postIndex - 1] : null;
+
+        container.innerHTML = `
+          <article class="fade-in">
+            <div class="mb-6 sm:mb-7">
+              <a
+                href="#home"
+                onclick="navigateTo('home'); return false;"
+                class="font-ui-ghibli text-xs font-bold text-secondary-g hover:text-accent-green transition-colors inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-subtle-g border border-soft-g"
+              >
+                <span>←</span>
+                <span>Quay lại mục lục</span>
+              </a>
+            </div>
+
+            <header class="mb-8 sm:mb-9 pb-6 sm:pb-7 border-b border-soft-g">
+              <div class="font-ui-ghibli text-xs font-semibold text-secondary-g mb-3 flex flex-wrap items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full bg-subtle-g border border-soft-g text-accent-green">${post.category}</span>
+                <span>·</span>
+                <span>${post.date}</span>
+                <span>·</span>
+                <span>${post.readTime}</span>
+              </div>
+              <h1 class="font-serif-book text-2xl sm:text-[33px] font-semibold leading-[1.28] tracking-tight text-primary-g">
+                ${post.title}
+              </h1>
+            </header>
+
+            <div class="prose-ghibli text-primary-g">
+              ${post.content}
+            </div>
+
+            <div class="mt-11 sm:mt-12 pt-6 border-t border-soft-g font-ui-ghibli text-xs font-semibold text-secondary-g flex flex-wrap items-center gap-2">
+              <span>Chủ đề:</span>
+              ${post.tags.map(tag => `<span class="px-2.5 py-0.5 rounded-full bg-subtle-g border border-soft-g text-primary-g">#${tag}</span>`).join('')}
+            </div>
+
+            <nav class="mt-8 sm:mt-9 pt-7 border-t border-soft-g grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 font-ui-ghibli">
+              <div>
+                ${prevPost ? `
+                  <a
+                    href="#post/${prevPost.id}"
+                    onclick="navigateTo('post', '${prevPost.id}'); return false;"
+                    class="group block p-3.5 rounded-2xl border border-soft-g bg-subtle-g hover:border-[var(--accent-green)] transition-colors"
+                  >
+                    <span class="text-xs font-bold text-secondary-g block mb-1">← Bài trước</span>
+                    <span class="font-serif-book text-[15.5px] font-semibold text-primary-g group-hover:text-accent-green transition-colors line-clamp-1">
+                      ${prevPost.title}
+                    </span>
+                  </a>
+                ` : ''}
+              </div>
+              <div class="sm:text-right">
+                ${nextPost ? `
+                  <a
+                    href="#post/${nextPost.id}"
+                    onclick="navigateTo('post', '${nextPost.id}'); return false;"
+                    class="group block p-3.5 rounded-2xl border border-soft-g bg-subtle-g hover:border-[var(--accent-green)] transition-colors"
+                  >
+                    <span class="text-xs font-bold text-secondary-g block mb-1">Bài tiếp theo →</span>
+                    <span class="font-serif-book text-[15.5px] font-semibold text-primary-g group-hover:text-accent-green transition-colors line-clamp-1">
+                      ${nextPost.title}
+                    </span>
+                  </a>
+                ` : ''}
+              </div>
+            </nav>
+          </article>
+        `;
+      } else if (currentView === 'archive') {
+        const years = [...new Set(POSTS.map(p => p.year))];
+
+        container.innerHTML = `
+          <div class="fade-in">
+            <header class="mb-8 sm:mb-9 pb-6 border-b border-soft-g">
+              <h1 class="font-serif-book text-2xl sm:text-3xl font-semibold text-primary-g mb-2">
+                Mục lục lưu trữ
+              </h1>
+              <p class="text-secondary-g text-sm font-ui-ghibli font-semibold">
+                Toàn bộ ${POSTS.length} trang viết được xếp theo niên đại.
+              </p>
+            </header>
+
+            <div class="space-y-9 sm:space-y-10">
+              ${years.map(year => `
+                <section>
+                  <h2 class="font-ui-ghibli text-xs font-bold uppercase tracking-widest text-accent-green pb-3 mb-4 border-b border-soft-g flex items-center gap-2">
+                    <span>🍂</span>
+                    <span>Năm ${year}</span>
+                  </h2>
+                  <ul class="space-y-3">
+                    ${POSTS.filter(p => p.year === year).map(post => `
+                      <li class="flex items-baseline gap-3 sm:gap-4 p-2.5 rounded-xl hover:bg-subtle-g transition-colors">
+                        <span class="font-ui-ghibli text-xs font-bold text-secondary-g w-14 sm:w-16 shrink-0">
+                          ${post.archiveDate}
+                        </span>
+                        <a
+                          href="#post/${post.id}"
+                          onclick="navigateTo('post', '${post.id}'); return false;"
+                          class="font-serif-book text-[16.5px] sm:text-[18.5px] text-primary-g hover:text-accent-green transition-colors leading-snug font-medium"
+                        >
+                          ${post.title}
+                        </a>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </section>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (currentView === 'about') {
+        container.innerHTML = `
+          <div class="fade-in prose-ghibli">
+            <header class="mb-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 pb-7 sm:pb-8 border-b border-soft-g">
+              <div class="w-24 h-28 shrink-0 rounded-2xl border-[1.5px] border-soft-g bg-subtle-g p-1.5 shadow-sm overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=300&q=80"
+                  onerror="this.onerror=null; this.src='https://placehold.co/160x200/F3ECDD/5E6859?text=Tác+Giả';"
+                  alt="Góc bàn viết"
+                  class="w-full h-full object-cover rounded-xl"
+                  style="filter: var(--img-filter);"
+                />
+              </div>
+              <div>
+                <h1 class="font-serif-book text-2xl sm:text-3xl font-semibold text-primary-g mb-1.5">
+                  Đôi dòng ngỏ cùng bạn đọc
+                </h1>
+                <p class="font-ui-ghibli text-xs font-semibold text-secondary-g">
+                  Người giữ trang · Viết code, chụp ảnh & tản văn từ một góc nhỏ nhiều nắng
+                </p>
+              </div>
+            </header>
+
+            <p class="drop-cap">Xin chào, cảm ơn bạn đã ghé thăm góc nhỏ này. Tôi lập nên trang blog này với một mong muốn giản dị: có một nơi trên Internet không bị chi phối bởi thuật toán, nơi những dòng tản văn, những đoạn mã nguồn và cả những bức ảnh đời thường đều được trình bày ấm áp như một cuốn sổ tay màu nước.</p>
+
+            <p>Ban ngày tôi làm việc với các hệ thống phần mềm bằng Rust, Go và TypeScript; cuối tuần tôi thích mang máy ảnh đi dạo quanh phố cũ, đọc những ấn bản văn học xưa và ghi chép lại những điều học được.</p>
+
+            <div class="leaf-ornament" aria-hidden="true">🌿 ✦ 🌿</div>
+
+            <h2>Kệ sách đang mở trên bàn</h2>
+            <ul class="space-y-3 mt-4 mb-8 text-[16px] sm:text-[17px] text-primary-g">
+              <li class="flex items-baseline justify-between gap-3 border-b border-soft-g pb-2.5">
+                <span><em>The Elements of Typographic Style</em> — Robert Bringhurst</span>
+                <span class="font-ui-ghibli text-xs font-bold text-accent-green shrink-0">Đang đọc</span>
+              </li>
+              <li class="flex items-baseline justify-between gap-3 border-b border-soft-g pb-2.5">
+                <span><em>Designing Data-Intensive Applications</em> — Martin Kleppmann</span>
+                <span class="font-ui-ghibli text-xs font-semibold text-secondary-g shrink-0">Tra cứu</span>
+              </li>
+              <li class="flex items-baseline justify-between gap-3 border-b border-soft-g pb-2.5">
+                <span><em>Vang bóng một thời</em> — Nguyễn Tuân</span>
+                <span class="font-ui-ghibli text-xs font-semibold text-secondary-g shrink-0">Đọc lại</span>
+              </li>
+            </ul>
+
+            <p>Nếu có một đoạn văn, một đoạn mã hay một bức ảnh nào ở đây gợi mở cho bạn điều gì mới, đừng ngần ngại gửi cho tôi vài dòng thư ngắn.</p>
+          </div>
+        `;
+      }
+    }
+
+    /* =========================================================================
+       5. THÔNG BÁO TOAST & PHÍM TẮT KHỞI TẠO
+       ========================================================================= */
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+      }, 2600);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const lbOpen = document.getElementById('photo-lightbox').classList.contains('is-open');
+      const upOpen = document.getElementById('upload-modal').classList.contains('is-open');
+
+      if (e.key === 'Escape') {
+        if (lbOpen) closeLightbox();
+        if (upOpen) closeUploadModal();
+      } else if (lbOpen && e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigateLightbox(-1);
+      } else if (lbOpen && e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateLightbox(1);
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initStars();
+      loadPhotoState();
+      initUploadDropZone();
+      initLightboxTouchSwipe();
+      const initialTheme = document.documentElement.getAttribute('data-theme') || 'meadow';
+      setTheme(initialTheme);
+      navigateTo('home');
+      // Bật lại hiệu ứng chuyển màu mượt mà sau khi khung hình đầu tiên đã vẽ xong
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('no-theme-transition');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
